@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { UserService } from './services/user.service';
-import { JwtProvider } from './providers/jwt.provider';
+import { UserClearingService, UserService } from './services/user.service';
+import { JWTProvider } from './providers/jwt.provider';
 import { HashProvider } from './providers/hash.provider';
 import { UserController } from './controller/user.controller';
 import { DatabaseModule } from '../../database/database.module';
@@ -10,6 +10,7 @@ import { Course } from '../course/entity/course.entity';
 import { UserCourseConcluded } from '../user-courses-concluded/entity/user-courses-concluded.entity';
 import { UserActivityAnswered } from '../user-activities-answered/entity/user-activities-answered.entity';
 import { UserScore } from '../user-score/entity/user-score.entity';
+import { UserRepository } from './repository/user.repository';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { UserScore } from '../user-score/entity/user-score.entity';
       UserScore
     ]),
   ],
-  providers: [UserService, JwtProvider, HashProvider],
+  providers: [UserService, UserClearingService, UserRepository, JWTProvider, HashProvider],
   controllers: [UserController],
 })
 export class UserModule implements NestModule {
