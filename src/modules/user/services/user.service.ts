@@ -7,17 +7,20 @@ import { emailValidate } from '../../../shared/utils/email.validator';
 import { passwordValidate } from '../../../shared/utils/password.validator';
 import { JWTProvider } from '../providers/jwt.provider';
 import { HashProvider } from '../providers/hash.provider';
-import { nameValidate } from '../../../shared/utils/name.validator';
+import { nameValidate } from '../../../shared/utils/username.validator';
 import { LoginUserBodyDTO, LoginUserResponseDTO } from '../domain/requests/LoginUser.request.dto';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { CommonException } from '../../../shared/domain/errors/Common.exception';
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
+import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
+import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 
 @Injectable()
 export class UserService {
     constructor(
         private readonly userRepository: UserRepository,
+        private readonly userScoreRepository: UserScoreRepository,
         private jwtProvider: JWTProvider,
         private hashProvider: HashProvider,
     )   {}
@@ -46,12 +49,17 @@ export class UserService {
             role: 'common'
         })
 
+        await this.userScoreRepository.save({
+            user_id: user.id_user,
+            total_score: 0,
+        })
+
         const token = this.jwtProvider.generate({
             payload: {
               id: user.id_user,
               role: 'common',
             },
-          });
+          })
 
           const response = {
             user: {
@@ -61,6 +69,7 @@ export class UserService {
             },
             token: token,
           };
+
     
           return response;
     }
@@ -99,6 +108,24 @@ export class UserService {
                 },
                 token: token,
             }
+        }
+    }
+
+    async homeData(user_id: number): Promise<HomeDataResponseDTO | UserNotFoundException> {
+        const user = await this.userRepository.findOne({
+            where: { id_user: user_id },
+        });
+
+        if (!user) throw new UserNotFoundException();
+
+        const userScore = await this.userScoreRepository.findOne({
+            where: { user_id: user_id },
+        });
+
+        return {
+          user: {
+            
+          }
         }
     }
 }

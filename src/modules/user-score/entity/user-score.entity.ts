@@ -10,7 +10,9 @@ import {
 
 @Entity()
 class UserScores {
-  @PrimaryColumn()
+  @PrimaryColumn({
+    unique: true,
+  })
   @OneToOne(() => User, (user) => user.id_user, {
     nullable: false,
   })
