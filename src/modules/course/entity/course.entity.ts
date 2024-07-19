@@ -10,7 +10,7 @@ import {
 
 @Entity()
 class Courses {
-@ManyToMany(() => User, (user) => user.id_user)
+  @ManyToMany(() => User, (user) => user.id_user)
   @PrimaryGeneratedColumn()
   id_course: number;
 

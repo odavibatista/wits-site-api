@@ -55,4 +55,4 @@ class Activities {
   updated_at: Date;
 }
 
-export { Activities as Activity }
+export { Activities as Activity };

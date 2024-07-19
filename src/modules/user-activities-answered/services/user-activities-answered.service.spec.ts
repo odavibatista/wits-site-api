@@ -9,7 +9,9 @@ describe('UserActivitiesAnsweredService', () => {
       providers: [UserActivitiesAnsweredService],
     }).compile();
 
-    service = module.get<UserActivitiesAnsweredService>(UserActivitiesAnsweredService);
+    service = module.get<UserActivitiesAnsweredService>(
+      UserActivitiesAnsweredService,
+    );
   });
 
   it('should be defined', () => {

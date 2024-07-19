@@ -6,13 +6,7 @@ import { User } from '../user/entity/user.entity';
 import { Activity } from '../activity/entity/activity.entity';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    TypeOrmModule.forFeature([
-      User,
-      Activity
-    ]),
-  ],
-  providers: [UserActivitiesAnsweredService]
+  imports: [DatabaseModule, TypeOrmModule.forFeature([User, Activity])],
+  providers: [UserActivitiesAnsweredService],
 })
 export class UserActivitiesAnsweredModule {}

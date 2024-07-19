@@ -23,10 +23,10 @@ describe('UserService Test Suites', () => {
         DatabaseModule,
         TypeOrmModule.forFeature([
           Activity,
-        Course,
-        UserCourseConcluded,
-        UserActivityAnswered,
-        UserScore
+          Course,
+          UserCourseConcluded,
+          UserActivityAnswered,
+          UserScore,
         ]),
       ],
       providers: [
@@ -36,12 +36,7 @@ describe('UserService Test Suites', () => {
         UserRepository,
         UserClearingService,
       ],
-      exports: [
-        JWTProvider,
-        HashProvider,
-        UserService,
-        UserClearingService,
-      ],
+      exports: [JWTProvider, HashProvider, UserService, UserClearingService],
     }).compile();
 
     userService = module.get<UserService>(UserService);
@@ -125,7 +120,7 @@ describe('UserService Test Suites', () => {
       email: 'fulaninhodasilva@gmail.com',
       password:
         'Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1Ab1',
-        username: 'fulaninho',
+      username: 'fulaninho',
     };
 
     expect(async () => {
@@ -203,5 +198,5 @@ describe('UserService Test Suites', () => {
     expect(async () => {
       await userService.register(user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 });

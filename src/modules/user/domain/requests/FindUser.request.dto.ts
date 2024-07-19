@@ -9,6 +9,4 @@ export const FindUserResponseSchema = z.object({
   member_since: z.string().max(50).describe('Membro desde'),
 });
 
-export class FindUserResponseDTO extends createZodDto(
-  FindUserResponseSchema,
-) {}
+export class FindUserResponseDTO extends createZodDto(FindUserResponseSchema) {}

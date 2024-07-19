@@ -15,7 +15,7 @@ import { ActivityModule } from '../modules/activity/activity.module';
     CourseModule,
     UserActivitiesAnsweredModule,
     UserCoursesConcludedModule,
-    ActivityModule
+    ActivityModule,
   ],
   controllers: [],
   providers: [],

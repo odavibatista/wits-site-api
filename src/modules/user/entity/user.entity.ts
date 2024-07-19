@@ -16,8 +16,8 @@ export enum Role {
 
 @Entity()
 class Users {
-    @ManyToMany(() => Course, (course) => course.id_course)
-    @ManyToMany(() => Activity, (activity) => activity.id_activity)
+  @ManyToMany(() => Course, (course) => course.id_course)
+  @ManyToMany(() => Activity, (activity) => activity.id_activity)
   @PrimaryGeneratedColumn()
   id_user: number;
 

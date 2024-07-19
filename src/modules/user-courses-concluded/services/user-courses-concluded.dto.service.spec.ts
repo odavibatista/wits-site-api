@@ -9,7 +9,9 @@ describe('UserCoursesConcludedDtoService', () => {
       providers: [UserCoursesConcludedDtoService],
     }).compile();
 
-    service = module.get<UserCoursesConcludedDtoService>(UserCoursesConcludedDtoService);
+    service = module.get<UserCoursesConcludedDtoService>(
+      UserCoursesConcludedDtoService,
+    );
   });
 
   it('should be defined', () => {

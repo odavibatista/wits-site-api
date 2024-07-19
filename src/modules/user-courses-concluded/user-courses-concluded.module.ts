@@ -6,10 +6,7 @@ import { User } from '../user/entity/user.entity';
 import { Course } from '../course/entity/course.entity';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    TypeOrmModule.forFeature([User, Course]),
-  ],
-  providers: [UserCoursesConcludedDtoService]
+  imports: [DatabaseModule, TypeOrmModule.forFeature([User, Course])],
+  providers: [UserCoursesConcludedDtoService],
 })
 export class UserCoursesConcludedModule {}

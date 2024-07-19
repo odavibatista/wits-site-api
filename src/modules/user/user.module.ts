@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { UserClearingService, UserService } from './services/user.service';
 import { JWTProvider } from './providers/jwt.provider';
 import { HashProvider } from './providers/hash.provider';
@@ -22,18 +27,23 @@ import { AuthenticationMiddleware } from './middlewares/auth.middleware';
       Course,
       UserCourseConcluded,
       UserActivityAnswered,
-      UserScore
+      UserScore,
     ]),
   ],
-  providers: [UserService, UserClearingService, UserRepository, UserScoreRepository, JWTProvider, HashProvider],
+  providers: [
+    UserService,
+    UserClearingService,
+    UserRepository,
+    UserScoreRepository,
+    JWTProvider,
+    HashProvider,
+  ],
   controllers: [UserController],
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthenticationMiddleware)
-      .forRoutes(
-        { path: 'user/home-data', method: RequestMethod.GET },
-      );
+      .forRoutes({ path: 'user/home-data', method: RequestMethod.GET });
   }
 }

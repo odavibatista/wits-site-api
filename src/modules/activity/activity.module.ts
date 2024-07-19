@@ -7,17 +7,10 @@ import { Course } from '../course/entity/course.entity';
 import { User } from '../user/entity/user.entity';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    TypeOrmModule.forFeature([
-      User,
-      Course,
-    ]),
-  ],
+  imports: [DatabaseModule, TypeOrmModule.forFeature([User, Course])],
   providers: [ActivityService],
   controllers: [ActivityController],
 })
 export class ActivityModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }

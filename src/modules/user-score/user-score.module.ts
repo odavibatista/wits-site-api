@@ -8,11 +8,7 @@ import { UserModule } from '../user/user.module';
 import { UserScoreRepository } from './repository/user-score-repository';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    UserModule,
-    TypeOrmModule.forFeature([User]),
-  ],
+  imports: [DatabaseModule, UserModule, TypeOrmModule.forFeature([User])],
   providers: [UserScoreService, UserScoreRepository],
   controllers: [UserScoreController],
 })
