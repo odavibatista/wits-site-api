@@ -12,6 +12,7 @@ import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
+import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
 
 @Controller('user')
 @ApiTags('Usuário')
@@ -97,7 +98,7 @@ export class UserController {
         @Get('home-data')
         @ApiBearerAuth('user-token')
         @ApiResponse({
-          status: new UnauthorizedException().getStatus(),
+          status: new NotAuthenticatedException().getStatus(),
           description: new UnauthorizedException().message,
           type: AllExceptionsFilterDTO,
         })
@@ -118,9 +119,9 @@ export class UserController {
           const user = req.user;
 
           if (!user) {
-            return res.status(new NoPermisionException().getStatus()).json({
-              message: new NoPermisionException().message,
-              status: new NoPermisionException().getStatus(),
+            return res.status(new NotAuthenticatedException().getStatus()).json({
+              message: new NotAuthenticatedException().message,
+              status: new NotAuthenticatedException().getStatus(),
             });
           }
 

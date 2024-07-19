@@ -124,7 +124,10 @@ export class UserService {
 
         return {
           user: {
-            
+            id: user.id_user,
+            username: user.username,
+            score: userScore.total_score,
+            role: user.role,
           }
         }
     }
