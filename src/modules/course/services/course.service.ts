@@ -7,6 +7,7 @@ import {
 } from '../domain/requests/FindCourses.request.dto';
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
+import { UserActivityAnsweredRepository } from '../../user-activities-answered/repository/user-activities-answered.repository';
 
 @Injectable()
 export class CourseService {
@@ -14,6 +15,7 @@ export class CourseService {
     private readonly courseRepository: CourseRepository,
     private readonly userCourseConcludedRepository: UserCourseConcludedRepository,
     private readonly activitiesRepository: ActivityRepository,
+    private readonly userActivityAnsweredRepository: UserActivityAnsweredRepository,
   ) {}
 
   async getCourses(skip: number): Promise<FindCoursesResponseDTO[]> {
@@ -55,7 +57,8 @@ export class CourseService {
 
     const activities = (
       await this.activitiesRepository.find({ where: { course_id: course_id } })
-    ).map((activity) => {
+    ).map(async (activity) => {
+      
       return {
         id_activity: activity.id_activity,
         question: activity.question,
@@ -65,14 +68,15 @@ export class CourseService {
         option_4: activity.option_4,
         correct_answer: activity.correct_answer,
       };
-    });
+    })
 
     return {
       id_course: course.id_course,
       course_name: course.course_name,
       points_worth: course.points_worth,
-      activities: activities,
+      activities: await Promise.all(activities),
       user_concluded_course: userConcluded ? true : false,
+      concluded_at: userConcluded ? userConcluded.created_at : null,
       created_at: course.created_at,
     };
   }

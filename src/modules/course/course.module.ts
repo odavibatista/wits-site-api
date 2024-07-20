@@ -19,6 +19,7 @@ import { ActivityRepository } from '../activity/repository/activity.repository';
 import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
 import { UserCourseConcluded } from '../user-courses-concluded/entity/user-courses-concluded.entity';
 import { JWTProvider } from '../user/providers/jwt.provider';
+import { UserActivityAnsweredRepository } from '../user-activities-answered/repository/user-activities-answered.repository';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { JWTProvider } from '../user/providers/jwt.provider';
     CourseRepository,
     UserCourseConcludedRepository,
     ActivityRepository,
+    UserActivityAnsweredRepository,
     JWTProvider,
   ],
 })

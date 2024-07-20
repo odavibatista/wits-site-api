@@ -41,6 +41,7 @@ export const FindIndividualCourseResponseSchema = z.object({
     }),
   ),
   user_concluded_course: z.boolean().describe('Usuário Concluiu o Curso'),
+  concluded_at: z.date().nullable().describe('Data de Conclusão'),
   created_at: z.date().describe('Data de Criação'),
 });
 

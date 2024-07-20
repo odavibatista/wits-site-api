@@ -26,7 +26,6 @@ import {
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
-import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
 
 @Controller('user')
