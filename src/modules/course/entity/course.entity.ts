@@ -2,6 +2,7 @@ import { User } from '../../../modules/user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -19,6 +20,9 @@ class Courses {
 
   @Column()
   points_worth: number;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   @CreateDateColumn({
     nullable: false,

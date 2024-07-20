@@ -3,6 +3,7 @@ import { User } from '../../../modules/user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToMany,
@@ -56,6 +57,9 @@ class Activities {
     nullable: false,
   })
   correct_answer: string;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   @CreateDateColumn({
     nullable: false,
