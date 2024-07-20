@@ -18,9 +18,9 @@ export class CourseService {
 
   async getCourses(skip: number): Promise<FindCoursesResponseDTO[]> {
     const courses = await this.courseRepository.find({
-        order: { created_at: 'DESC' },
-        take: 20,
-        skip
+      order: { created_at: 'DESC' },
+      take: 20,
+      skip,
     });
 
     const coursesWithActivities = await Promise.all(

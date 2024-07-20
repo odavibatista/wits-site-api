@@ -45,7 +45,7 @@ export class ConjunctCoursesController {
   async browse(
     @Req() req: Request,
     @Res() res: Response,
-    @Query() paginationDto: PaginationDto
+    @Query() paginationDto: PaginationDto,
   ): Promise<FindCoursesResponseDTO[] | AllExceptionsFilterDTO> {
     const user = req.user;
 
@@ -57,7 +57,7 @@ export class ConjunctCoursesController {
     }
 
     const { page } = paginationDto;
-    
+
     const result = await this.courseService.getCourses((page - 1) * 20);
 
     if (result instanceof HttpException) {

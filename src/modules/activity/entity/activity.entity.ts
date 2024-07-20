@@ -26,22 +26,35 @@ class Activities {
   })
   course_id: number;
 
-  @Column()
+  @Column({
+    nullable: false,
+    type: 'longtext'
+  })
   question: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   option_1: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   option_2: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   option_3: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   option_4: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   correct_answer: string;
 
   @CreateDateColumn({

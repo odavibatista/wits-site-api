@@ -36,17 +36,15 @@ import { JWTProvider } from '../user/providers/jwt.provider';
 })
 export class CourseModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes(
-        { 
-          path: 'courses/browse', 
-          method: RequestMethod.GET 
-        },
-        {
-          path: 'course/:course_id/info',
-          method: RequestMethod.GET,
-        },
-      );
+    consumer.apply(AuthenticationMiddleware).forRoutes(
+      {
+        path: 'courses/browse',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'course/:course_id/info',
+        method: RequestMethod.GET,
+      },
+    );
   }
 }
