@@ -74,7 +74,7 @@ describe('Activity Service Tests Suite', () => {
         correct_answer: 'Test',
       });
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not create an activity if the correct answer is greater than 4', async () => {
     expect(async () => {
@@ -141,7 +141,7 @@ describe('Activity Service Tests Suite', () => {
         correct_answer: 'Test',
       });
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not edit the activity if the correct answer is greater than 4', async () => {
     expect(async () => {

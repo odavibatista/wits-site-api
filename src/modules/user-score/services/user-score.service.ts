@@ -43,11 +43,24 @@ export class UserScoreService {
     return userScore;
   }
 
-  async updateScore(user_id: number, score_to_add: number): Promise<void> {
-    if (score_to_add < 0)
+  async updateScore(
+    user_id: number,
+    score_to_add: number,
+  ): Promise<void | UserNotFoundException> {
+    if (
+      score_to_add <= 0 ||
+      !Number.isInteger(score_to_add) ||
+      score_to_add.toString().length > 5
+    )
       throw new UnprocessableDataException(
-        'Pontuação inválida. Número negativo.',
+        'Pontuação inválida. Valor não pode ser negativo, decimal ou com mais de 5 dígitos.',
       );
+
+    const userScoreExists = await this.userRepository.findOne({
+      where: { id_user: user_id },
+    });
+
+    if (!userScoreExists) throw new UserNotFoundException();
 
     const userScore = await this.userScoreRepository.findOne({
       where: { user_id: user_id },

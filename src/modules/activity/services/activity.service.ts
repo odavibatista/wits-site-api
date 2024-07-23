@@ -75,7 +75,7 @@ export class ActivityService {
       throw new UnprocessableDataException(
         'Insira o número válido da resposta correta (entre 1 e 4).',
       );
-      
+
     const activity = await this.activityRepository.findOne({
       where: { id_activity: id },
     });
