@@ -20,6 +20,7 @@ import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
 import { UserCourseConcluded } from '../user-courses-concluded/entity/user-courses-concluded.entity';
 import { JWTProvider } from '../user/providers/jwt.provider';
 import { UserActivityAnsweredRepository } from '../user-activities-answered/repository/user-activities-answered.repository';
+import { UserRepository } from '../user/repository/user.repository';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { UserActivityAnsweredRepository } from '../user-activities-answered/repo
     ActivityRepository,
     UserActivityAnsweredRepository,
     JWTProvider,
+    UserRepository
   ],
 })
 export class CourseModule implements NestModule {
