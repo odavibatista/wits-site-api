@@ -35,7 +35,7 @@ import { UserRepository } from '../user/repository/user.repository';
     ActivityRepository,
     UserActivityAnsweredRepository,
     JWTProvider,
-    UserRepository
+    UserRepository,
   ],
 })
 export class CourseModule implements NestModule {

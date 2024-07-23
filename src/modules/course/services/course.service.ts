@@ -57,10 +57,14 @@ export class CourseService {
   async getCourseData(
     user_id: number,
     course_id: number,
-  ): Promise<FindIndividualCourseResponseDTO | UserNotFoundException | CourseNotFoundException> {
+  ): Promise<
+    | FindIndividualCourseResponseDTO
+    | UserNotFoundException
+    | CourseNotFoundException
+  > {
     const user = await this.userRepository.findOne({
       where: { id_user: user_id },
-    })
+    });
 
     if (!user) throw new UserNotFoundException();
 
@@ -102,12 +106,16 @@ export class CourseService {
   async createCourse(
     courseData: CreateCourseRequestDTO,
   ): Promise<CreateCourseResponseDTO | UnprocessableDataException> {
-    if (!nameValidate(courseData.course_name) || courseData.course_name.length < 5 || courseData.course_name.length > 25)
+    if (
+      !nameValidate(courseData.course_name) ||
+      courseData.course_name.length < 5 ||
+      courseData.course_name.length > 25
+    )
       throw new UnprocessableDataException('Nome do curso inválido');
 
     if (
       !Number.isInteger(courseData.points_worth) ||
-      courseData.points_worth <= 0 || 
+      courseData.points_worth <= 0 ||
       courseData.points_worth.toString().length > 5
     )
       throw new UnprocessableDataException(
@@ -138,7 +146,7 @@ export class CourseService {
 
     if (
       !Number.isInteger(courseData.points_worth) ||
-      courseData.points_worth <= 0 || 
+      courseData.points_worth <= 0 ||
       courseData.points_worth.toString().length > 5
     )
       throw new UnprocessableDataException(

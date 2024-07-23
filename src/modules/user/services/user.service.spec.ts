@@ -222,8 +222,8 @@ describe('UserService Test Suites', () => {
       password: 'SenhaDoFulano123@1@!@',
       username: 'fulano1',
     };
-    
-    await userService.register(user).finally(async () =>  {
+
+    await userService.register(user).finally(async () => {
       expect(async () => {
         await userService.register({
           email: 'fulaninhodasilva@gmail.com',
@@ -231,8 +231,8 @@ describe('UserService Test Suites', () => {
           username: 'fulano2',
         });
       }).rejects.toThrow(EmailAlreadyRegisteredException);
-    })
-  })
+    });
+  });
 
   it('should not create an user with a duplicated username', async () => {
     const user: CreateUserDTO = {
@@ -240,8 +240,8 @@ describe('UserService Test Suites', () => {
       password: 'SenhaDoFulano123@1@!@',
       username: 'fulano2',
     };
-    
-    await userService.register(user).finally(async () =>  {
+
+    await userService.register(user).finally(async () => {
       expect(async () => {
         await userService.register({
           email: 'fulaninhodasilva@gmail.com',
@@ -249,10 +249,10 @@ describe('UserService Test Suites', () => {
           username: 'fulano2',
         });
       }).rejects.toThrow(UsernameAlreadyRegisteredException);
-    })
-  })
+    });
+  });
 
-  it('should create an user given the valid credentials', async ()  =>  {
+  it('should create an user given the valid credentials', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',
       password: 'SenhaDoFulano123@1@!@',
@@ -262,8 +262,8 @@ describe('UserService Test Suites', () => {
     await userService.register(user).then(async (response) => {
       expect(response).toHaveProperty('token');
       expect(response).toHaveProperty('user');
-    })
-  })
+    });
+  });
 
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
@@ -272,13 +272,13 @@ describe('UserService Test Suites', () => {
       username: 'joaozinho',
     };
 
-    expect(async () =>  {
+    expect(async () => {
       await userService.login({
         username: 'joaozinho_errado',
-        inserted_password: user.password
-      })
-    }).rejects.toThrow(InvalidCredentialsException)
-  })
+        inserted_password: user.password,
+      });
+    }).rejects.toThrow(InvalidCredentialsException);
+  });
 
   it('should not login an user given the wrong password', async () => {
     const user: CreateUserDTO = {
@@ -287,13 +287,13 @@ describe('UserService Test Suites', () => {
       username: 'joaozinho',
     };
 
-    expect(async () =>  {
+    expect(async () => {
       await userService.login({
         username: user.username,
-        inserted_password: 'SenhaErrada123@1@!@'
-      })
-    }).rejects.toThrow(InvalidCredentialsException)
-  })
+        inserted_password: 'SenhaErrada123@1@!@',
+      });
+    }).rejects.toThrow(InvalidCredentialsException);
+  });
 
   it('should login an user given the valid credentials', async () => {
     const user: CreateUserDTO = {
@@ -302,24 +302,26 @@ describe('UserService Test Suites', () => {
       username: 'joaozinho',
     };
 
-    await userService.login({
-      username: user.username,
-      inserted_password: user.password
-    }).then(async (response) => {
-      expect(response).toHaveProperty('token');
-      expect(response).toHaveProperty('user');
-    })
-  })
+    await userService
+      .login({
+        username: user.username,
+        inserted_password: user.password,
+      })
+      .then(async (response) => {
+        expect(response).toHaveProperty('token');
+        expect(response).toHaveProperty('user');
+      });
+  });
 
-  it('should throw an error when trying to use home data with an unexiting user id', async()  =>  {
-    expect(async()  =>  {
-      await userService.homeData(0)
-    }).rejects.toThrow(UserNotFoundException)
-  })
+  it('should throw an error when trying to use home data with an unexiting user id', async () => {
+    expect(async () => {
+      await userService.homeData(0);
+    }).rejects.toThrow(UserNotFoundException);
+  });
 
   it('should bring the home data of an user given the valid id', async () => {
     await userService.homeData(2).then(async (response) => {
       expect(response).toHaveProperty('user');
-    })
-  })
+    });
+  });
 });

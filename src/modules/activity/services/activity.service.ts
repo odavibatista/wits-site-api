@@ -12,6 +12,7 @@ import {
   EditActivityResponseDTO,
 } from '../domain/requests/EditActivity.request.dto';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
+import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 
 @Injectable()
 export class ActivityService {
@@ -20,7 +21,15 @@ export class ActivityService {
     private readonly courseRepository: CourseRepository,
   ) {}
 
-  async getActivities(course_id: number): Promise<Activity[]> {
+  async getActivities(
+    course_id: number,
+  ): Promise<Activity[] | CourseNotFoundException> {
+    const course = await this.courseRepository.findOne({
+      where: { id_course: course_id },
+    });
+
+    if (!course) throw new CourseNotFoundException();
+
     return await this.activityRepository.find({
       where: { course_id },
       order: { created_at: 'ASC' },
@@ -30,6 +39,17 @@ export class ActivityService {
   async createActivity(
     activityData: CreateActivityRequestDTO,
   ): Promise<CreateActivityResponseDTO | CourseNotFoundException> {
+    if (
+      activityData.correct_answer.length < 1 ||
+      activityData.correct_answer.length > 1 ||
+      isNaN(Number(activityData.correct_answer)) ||
+      Number(activityData.correct_answer) > 4 ||
+      Number(activityData.correct_answer) < 1
+    )
+      throw new UnprocessableDataException(
+        'Insira o número válido da resposta correta (entre 1 e 4).',
+      );
+
     const course = await this.courseRepository.findOne({
       where: { id_course: activityData.course_id },
     });
@@ -45,6 +65,17 @@ export class ActivityService {
     id: number,
     activityData: EditActivityRequestDTO,
   ): Promise<EditActivityResponseDTO | ActivityNotFoundException> {
+    if (
+      activityData.correct_answer.length < 1 ||
+      activityData.correct_answer.length > 1 ||
+      isNaN(Number(activityData.correct_answer)) ||
+      Number(activityData.correct_answer) > 4 ||
+      Number(activityData.correct_answer) < 1
+    )
+      throw new UnprocessableDataException(
+        'Insira o número válido da resposta correta (entre 1 e 4).',
+      );
+      
     const activity = await this.activityRepository.findOne({
       where: { id_activity: id },
     });
