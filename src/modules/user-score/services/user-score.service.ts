@@ -20,17 +20,20 @@ export class UserScoreService {
 
     const ids = top50Scores.map((score) => score.user_id);
 
-    const users = await this.userRepository.bringUsersCollection(ids)
+    const users = await this.userRepository.bringUsersCollection(ids);
 
     return top50Scores.map((score, index) => {
       return {
         id: score.user_id,
         username: users[index].username,
         score: score.total_score,
-      }})
+      };
+    });
   }
 
-  async bringIndividualScore(user_id: number): Promise<any | UserNotFoundException> {
+  async bringIndividualScore(
+    user_id: number,
+  ): Promise<any | UserNotFoundException> {
     const userScore = await this.userScoreRepository.findOne({
       where: { user_id: user_id },
     });

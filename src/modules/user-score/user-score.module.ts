@@ -1,6 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { UserScoreService } from './services/user-score.service';
-import { ConjunctUserScoreController, IndividualUserScoreController } from './controller/user-score.controller';
+import {
+  ConjunctUserScoreController,
+  IndividualUserScoreController,
+} from './controller/user-score.controller';
 import { User } from '../user/entity/user.entity';
 import { DatabaseModule } from 'src/database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,18 +20,23 @@ import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 
 @Module({
-  imports: [DatabaseModule, UserModule, TypeOrmModule.forFeature([User, UserScore])],
-  providers: [UserScoreService, UserScoreRepository, UserRepository, JWTProvider],
+  imports: [
+    DatabaseModule,
+    UserModule,
+    TypeOrmModule.forFeature([User, UserScore]),
+  ],
+  providers: [
+    UserScoreService,
+    UserScoreRepository,
+    UserRepository,
+    JWTProvider,
+  ],
   controllers: [ConjunctUserScoreController, IndividualUserScoreController],
 })
-
 export class UserScoreModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthenticationMiddleware)
-      .forRoutes(
-        { path: 'scores/top-scores', method: RequestMethod.GET },
-
-      );
+      .forRoutes({ path: 'scores/top-scores', method: RequestMethod.GET });
   }
 }

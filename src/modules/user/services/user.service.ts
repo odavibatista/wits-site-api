@@ -21,7 +21,6 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
-import { FindUserCollectionResponseDTO } from '../domain/requests/FindUserCollection.request.dto';
 
 @Injectable()
 export class UserService {
@@ -39,7 +38,11 @@ export class UserService {
     | EmailAlreadyRegisteredException
     | UnprocessableDataException
   > {
-    if (!nameValidate(credentials.username))
+    if (
+      !nameValidate(credentials.username) ||
+      credentials.username.length < 5 ||
+      credentials.username.length > 15
+    )
       throw new UnprocessableDataException('Nome inválido.');
 
     if (

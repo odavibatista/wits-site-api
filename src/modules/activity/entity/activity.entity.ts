@@ -29,7 +29,7 @@ class Activities {
 
   @Column({
     nullable: false,
-    type: 'longtext'
+    type: 'longtext',
   })
   question: string;
 

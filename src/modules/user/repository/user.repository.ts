@@ -9,12 +9,14 @@ export class UserRepository extends Repository<User> {
     super(User, dataSource.createEntityManager());
   }
 
-  async bringUsersCollection(user_ids: number[]): Promise<MultipleUserCollectionResponseDTO> {
+  async bringUsersCollection(
+    user_ids: number[],
+  ): Promise<MultipleUserCollectionResponseDTO> {
     const users = await this.find({
       where: { id_user: In(user_ids) },
-    })
+    });
 
-    return users.map(user => ({
+    return users.map((user) => ({
       id: user.id_user,
       username: user.username,
     }));

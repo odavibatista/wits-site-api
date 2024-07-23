@@ -6,8 +6,14 @@ export const FindUserCollectionResponseSchema = z.object({
   username: z.string().max(50).describe('Nome do usuário'),
 });
 
-export class FindUserCollectionResponseDTO extends createZodDto(FindUserCollectionResponseSchema) {}
+export class FindUserCollectionResponseDTO extends createZodDto(
+  FindUserCollectionResponseSchema,
+) {}
 
-export const MultipleUserCollectionResponseSchema = z.array(FindUserCollectionResponseSchema);
+export const MultipleUserCollectionResponseSchema = z.array(
+  FindUserCollectionResponseSchema,
+);
 
-export class MultipleUserCollectionResponseDTO extends createZodDto(MultipleUserCollectionResponseSchema) {}
+export class MultipleUserCollectionResponseDTO extends createZodDto(
+  MultipleUserCollectionResponseSchema,
+) {}

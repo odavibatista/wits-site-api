@@ -10,9 +10,9 @@ export class AnswerQuestionRequestDTO extends createZodDto(
 ) {}
 
 export const AnswerQuestionResponseSchema = z.object({
-    true: z.boolean().describe('Resposta correta'),
-})
+  true: z.boolean().describe('Resposta correta'),
+});
 
 export class AnswerQuestionResponseDTO extends createZodDto(
-    AnswerQuestionResponseSchema,
+  AnswerQuestionResponseSchema,
 ) {}

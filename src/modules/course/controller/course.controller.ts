@@ -23,9 +23,15 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { Request, Response } from 'express';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
 import { PaginationDto } from '../../../shared/domain/dtos/providers/Pagination.dto';
-import { CreateCourseRequestDTO, CreateCourseResponseDTO } from '../domain/requests/CreateCourse.request.dto';
+import {
+  CreateCourseRequestDTO,
+  CreateCourseResponseDTO,
+} from '../domain/requests/CreateCourse.request.dto';
 import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
-import { EditCourseRequestDTO, EditCourseResponseDTO } from '../domain/requests/EditCourse.request.dto';
+import {
+  EditCourseRequestDTO,
+  EditCourseResponseDTO,
+} from '../domain/requests/EditCourse.request.dto';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 
 @Controller('courses')
@@ -158,7 +164,7 @@ export class IndividualCoursesController {
     @Req() req: Request,
     @Res() res: Response,
     @Body() courseData: CreateCourseRequestDTO,
-  ): Promise<CreateCourseResponseDTO | AllExceptionsFilterDTO>  {
+  ): Promise<CreateCourseResponseDTO | AllExceptionsFilterDTO> {
     const user = req.user;
 
     if (!user || user.role !== 'admin')
@@ -211,7 +217,7 @@ export class IndividualCoursesController {
     @Res() res: Response,
     @Param('course_id') courseId: number,
     @Body() courseData: EditCourseRequestDTO,
-  ): Promise <EditCourseResponseDTO | AllExceptionsFilterDTO> {
+  ): Promise<EditCourseResponseDTO | AllExceptionsFilterDTO> {
     const user = req.user;
 
     if (!user || user.role !== 'admin')
@@ -276,5 +282,5 @@ export class IndividualCoursesController {
     } else {
       return res.status(204).json();
     }
-  } 
+  }
 }

@@ -58,7 +58,7 @@ export class CourseModule implements NestModule {
       {
         path: 'course/remove/:course_id',
         method: RequestMethod.DELETE,
-      }
+      },
     );
   }
 }

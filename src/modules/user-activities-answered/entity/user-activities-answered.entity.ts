@@ -1,6 +1,13 @@
 import { Activity } from '../../../modules/activity/entity/activity.entity';
 import { User } from '../../../modules/user/entity/user.entity';
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import {
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 class UserActivitiesAnswered {

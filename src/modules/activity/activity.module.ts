@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { ActivityService } from './services/activity.service';
 import { ActivityController } from './controller/activity.controller';
 import { DatabaseModule } from '../../database/database.module';
@@ -12,7 +17,12 @@ import { JWTProvider } from '../user/providers/jwt.provider';
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([User, Course])],
-  providers: [ActivityService, ActivityRepository, CourseRepository, JWTProvider],
+  providers: [
+    ActivityService,
+    ActivityRepository,
+    CourseRepository,
+    JWTProvider,
+  ],
   controllers: [ActivityController],
 })
 export class ActivityModule implements NestModule {

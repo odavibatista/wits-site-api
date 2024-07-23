@@ -1,6 +1,13 @@
 import { Course } from '../../../modules/course/entity/course.entity';
 import { User } from '../../../modules/user/entity/user.entity';
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import {
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 class UserCoursesConcluded {

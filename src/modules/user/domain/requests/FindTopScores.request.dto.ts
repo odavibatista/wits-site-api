@@ -7,8 +7,14 @@ export const FindTopScoresResponseSchema = z.object({
   score: z.number().int().positive().describe('Pontuação do usuário'),
 });
 
-export class FindTopScoresResponseDTO extends createZodDto(FindTopScoresResponseSchema) {}
+export class FindTopScoresResponseDTO extends createZodDto(
+  FindTopScoresResponseSchema,
+) {}
 
-export const MultipleTopScoresResponseSchema = z.array(FindTopScoresResponseSchema);
+export const MultipleTopScoresResponseSchema = z.array(
+  FindTopScoresResponseSchema,
+);
 
-export class MultipleTopScoresResponseDTO extends createZodDto(MultipleTopScoresResponseSchema) {}
+export class MultipleTopScoresResponseDTO extends createZodDto(
+  MultipleTopScoresResponseSchema,
+) {}

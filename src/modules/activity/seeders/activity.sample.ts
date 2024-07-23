@@ -255,4 +255,8 @@ Entretanto, as duas afirmações de João são falsas. Sabe-se que Bruno é o te
   },
 ];
 
-export const TOTAL_OF_ACTIVITIES = course_1_activities.length + course_2_activities.length + course_3_activities.length + course_4_activities.length;
+export const TOTAL_OF_ACTIVITIES =
+  course_1_activities.length +
+  course_2_activities.length +
+  course_3_activities.length +
+  course_4_activities.length;

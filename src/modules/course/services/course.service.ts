@@ -8,10 +8,16 @@ import {
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
 import { UserActivityAnsweredRepository } from '../../user-activities-answered/repository/user-activities-answered.repository';
-import { CreateCourseRequestDTO, CreateCourseResponseDTO } from '../domain/requests/CreateCourse.request.dto';
+import {
+  CreateCourseRequestDTO,
+  CreateCourseResponseDTO,
+} from '../domain/requests/CreateCourse.request.dto';
 import { nameValidate } from '../../../shared/utils/username.validator';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { EditCourseRequestDTO, EditCourseResponseDTO } from '../domain/requests/EditCourse.request.dto';
+import {
+  EditCourseRequestDTO,
+  EditCourseResponseDTO,
+} from '../domain/requests/EditCourse.request.dto';
 
 @Injectable()
 export class CourseService {
@@ -62,7 +68,6 @@ export class CourseService {
     const activities = (
       await this.activitiesRepository.find({ where: { course_id: course_id } })
     ).map(async (activity) => {
-      
       return {
         id_activity: activity.id_activity,
         question: activity.question,
@@ -72,7 +77,7 @@ export class CourseService {
         option_4: activity.option_4,
         correct_answer: activity.correct_answer,
       };
-    })
+    });
 
     return {
       id_course: course.id_course,
@@ -85,10 +90,19 @@ export class CourseService {
     };
   }
 
-  async createCourse(courseData: CreateCourseRequestDTO): Promise<CreateCourseResponseDTO | UnprocessableDataException> {
-    if(!nameValidate(courseData.course_name)) throw new UnprocessableDataException('Nome do curso inválido');
+  async createCourse(
+    courseData: CreateCourseRequestDTO,
+  ): Promise<CreateCourseResponseDTO | UnprocessableDataException> {
+    if (!nameValidate(courseData.course_name))
+      throw new UnprocessableDataException('Nome do curso inválido');
 
-    if(!Number.isInteger(courseData.points_worth) || courseData.points_worth <= 0) throw new UnprocessableDataException('Total de pontos deve ser um número inteiro positivo maior que 0.');
+    if (
+      !Number.isInteger(courseData.points_worth) ||
+      courseData.points_worth <= 0
+    )
+      throw new UnprocessableDataException(
+        'Total de pontos deve ser um número inteiro positivo maior que 0.',
+      );
 
     const course = await this.courseRepository.save({
       course_name: courseData.course_name,
@@ -103,24 +117,39 @@ export class CourseService {
     };
   }
 
-  async editCourse(id: number, courseData: EditCourseRequestDTO): Promise<EditCourseResponseDTO | CourseNotFoundException | UnprocessableDataException> {
-    if(!nameValidate(courseData.course_name)) throw new UnprocessableDataException('Nome do curso inválido');
+  async editCourse(
+    id: number,
+    courseData: EditCourseRequestDTO,
+  ): Promise<
+    EditCourseResponseDTO | CourseNotFoundException | UnprocessableDataException
+  > {
+    if (!nameValidate(courseData.course_name))
+      throw new UnprocessableDataException('Nome do curso inválido');
 
-    if(!Number.isInteger(courseData.points_worth) || courseData.points_worth <= 0) throw new UnprocessableDataException('Total de pontos deve ser um número inteiro positivo maior que 0.');
+    if (
+      !Number.isInteger(courseData.points_worth) ||
+      courseData.points_worth <= 0
+    )
+      throw new UnprocessableDataException(
+        'Total de pontos deve ser um número inteiro positivo maior que 0.',
+      );
 
     const course = await this.courseRepository.findOne({
       where: { id_course: id },
     });
 
-    if(!course) throw new CourseNotFoundException();
+    if (!course) throw new CourseNotFoundException();
 
     course.course_name = courseData.course_name;
     course.points_worth = courseData.points_worth;
 
-    await this.courseRepository.update({ id_course: id }, {
-      course_name: course.course_name,
-      points_worth: course.points_worth,
-    });
+    await this.courseRepository.update(
+      { id_course: id },
+      {
+        course_name: course.course_name,
+        points_worth: course.points_worth,
+      },
+    );
 
     return {
       id_course: course.id_course,
@@ -135,7 +164,7 @@ export class CourseService {
       where: { id_course: id },
     });
 
-    if(!course) throw new CourseNotFoundException();
+    if (!course) throw new CourseNotFoundException();
 
     await this.courseRepository.softDelete({ id_course: id });
 
