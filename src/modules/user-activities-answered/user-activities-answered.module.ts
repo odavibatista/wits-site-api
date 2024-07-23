@@ -14,10 +14,13 @@ import { UserCourseConcludedRepository } from '../user-courses-concluded/reposit
 import { UserScoreRepository } from '../user-score/repository/user-score-repository';
 import { UserScoreService } from '../user-score/services/user-score.service';
 import { CourseRepository } from '../course/repository/course.repository';
+import { UserService } from '../user/services/user.service';
+import { HashProvider } from '../user/providers/hash.provider';
+import { UserScore } from '../user-score/entity/user-score.entity';
 
 @Module({
-  imports: [DatabaseModule, TypeOrmModule.forFeature([User, Activity])],
-  providers: [UserActivityAnsweredRepository, UserActivitiesAnsweredService, ActivityRepository, UserRepository, JWTProvider, UserCourseConcludedRepository, UserScoreService, CourseRepository, UserScoreRepository],
+  imports: [DatabaseModule, TypeOrmModule.forFeature([User, Activity, UserScore])],
+  providers: [UserActivityAnsweredRepository, UserActivitiesAnsweredService, ActivityRepository, UserRepository, JWTProvider, UserCourseConcludedRepository, UserScoreService, CourseRepository, UserScoreRepository, UserService, HashProvider],
   controllers: [UserActivitiesAnsweredController],
 })
 export class UserActivitiesAnsweredModule implements NestModule {

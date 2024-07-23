@@ -21,6 +21,7 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
+import { FindUserCollectionResponseDTO } from '../domain/requests/FindUserCollection.request.dto';
 
 @Injectable()
 export class UserService {
