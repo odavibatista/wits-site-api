@@ -29,7 +29,7 @@ class Activities {
 
   @Column({
     nullable: false,
-    type: 'longtext',
+    type: process.env.DB_ENGINE === 'mysql' ? 'longtext' : 'text',
   })
   question: string;
 
