@@ -48,6 +48,27 @@ describe('Activity Service Tests Suite', () => {
     expect(activities).toBeInstanceOf(Array);
   });
 
+  it('should not bring the activity if the activity does not exist', async () => {
+    expect(async () => {
+      await activityService.getActivity(0);
+    }).rejects.toThrow(ActivityNotFoundException);
+  })
+
+  it('should bring the activity given a valid id', async () => {
+    const activity = await activityService.getActivity(1);
+
+    expect(activity).toHaveProperty('id_activity');
+    expect(activity).toHaveProperty('course_id');
+    expect(activity).toHaveProperty('question');
+    expect(activity).toHaveProperty('option_1');
+    expect(activity).toHaveProperty('option_2');
+    expect(activity).toHaveProperty('option_3');
+    expect(activity).toHaveProperty('option_4');
+    expect(activity).toHaveProperty('correct_answer');
+    expect(activity).toHaveProperty('created_at')
+    expect(activity).toHaveProperty('updated_at')
+  })
+
   it('should not create an activity if the course does not exist', async () => {
     expect(async () => {
       await activityService.createActivity({
@@ -114,7 +135,15 @@ describe('Activity Service Tests Suite', () => {
       option_4: 'Test',
       correct_answer: '1',
     });
-    expect(activity).toBeDefined();
+    expect(activity).toHaveProperty('id_activity');
+    expect(activity).toHaveProperty('course_id');
+    expect(activity).toHaveProperty('question');
+    expect(activity).toHaveProperty('option_1');
+    expect(activity).toHaveProperty('option_2');
+    expect(activity).toHaveProperty('option_3');
+    expect(activity).toHaveProperty('option_4');
+    expect(activity).toHaveProperty('correct_answer');
+    expect(activity).toHaveProperty('created_at')
   });
 
   it('should not edit an activity if the activity does not exist', async () => {
@@ -178,7 +207,15 @@ describe('Activity Service Tests Suite', () => {
       option_4: 'Test',
       correct_answer: '1',
     });
-    expect(activity).toBeDefined();
+    expect(activity).toHaveProperty('id_activity');
+    expect(activity).toHaveProperty('course_id');
+    expect(activity).toHaveProperty('question');
+    expect(activity).toHaveProperty('option_1');
+    expect(activity).toHaveProperty('option_2');
+    expect(activity).toHaveProperty('option_3');
+    expect(activity).toHaveProperty('option_4');
+    expect(activity).toHaveProperty('correct_answer');
+    expect(activity).toHaveProperty('created_at')
   });
 
   it('should not remove an activity if the activity does not exist', async () => {

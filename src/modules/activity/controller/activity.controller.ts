@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpException,
   Param,
   Patch,
@@ -23,11 +24,54 @@ import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllEx
 import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
 import { EditActivityResponseDTO } from '../domain/requests/EditActivity.request.dto';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
+import { GetActivityResponseDTO } from '../domain/requests/GetActivity.request.dto';
 
 @Controller('activity')
 @ApiTags('Atividades do Curso')
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
+
+  @Get(':activity_id/info')
+  @ApiBearerAuth('user-token')
+  @ApiResponse({
+    status: 200,
+    description: 'Atividade retornada com sucesso.',
+    type: GetActivityResponseDTO,
+  })
+  @ApiResponse({
+    status: new NotAuthenticatedException().getStatus(),
+    description: new NotAuthenticatedException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  @ApiResponse({
+    status: new ActivityNotFoundException().getStatus(),
+    description: new ActivityNotFoundException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  async getActivity(
+    @Param('activity_id') activity_id: number,
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<GetActivityResponseDTO | AllExceptionsFilterDTO> {
+    const user = req.user;
+
+    if (!user || user.role !== 'admin')
+      return res.status(new NotAuthenticatedException().getStatus()).json({
+        message: new NotAuthenticatedException().message,
+        status: new NotAuthenticatedException().getStatus(),
+      });
+
+    const result = await this.activityService.getActivity(activity_id);
+
+    if (result instanceof HttpException) {
+      return res.status(result.getStatus()).json({
+        message: result.message,
+        status: result.getStatus(),
+      });
+    } else {
+      return res.status(200).json(result);
+    }
+  }
 
   @Post('create')
   @ApiBearerAuth('user-token')

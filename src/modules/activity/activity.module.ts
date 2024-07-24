@@ -42,6 +42,10 @@ export class ActivityModule implements NestModule {
         path: 'activity/remove/:id',
         method: RequestMethod.DELETE,
       },
+      {
+        path: '/activity/:activity_id/info',
+        method: RequestMethod.GET,
+      },
     );
   }
 }

@@ -61,6 +61,16 @@ export class ActivityService {
     };
   }
 
+  async getActivity(id: number): Promise<Activity | ActivityNotFoundException> {
+    const activity = await this.activityRepository.findOne({
+      where: { id_activity: id },
+    });
+
+    if (!activity) throw new ActivityNotFoundException();
+
+    return activity;
+  }
+
   async editActivity(
     id: number,
     activityData: EditActivityRequestDTO,
