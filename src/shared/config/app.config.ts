@@ -52,7 +52,7 @@ try {
     API_URL: process.env.API_URL,
     JWT_KEY: process.env.JWT_KEY,
     API_PORT: parseInt(process.env.API_PORT),
-    SSL: process.env.NODE_ENV === 'production' ? true : false,
+    SSL: process.env.NODE_ENV === 'production' ? true : false, 
   });
 } catch (error) {
   if (error instanceof ZodError) {
