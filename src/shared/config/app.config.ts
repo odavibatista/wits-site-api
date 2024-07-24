@@ -23,6 +23,7 @@ const appConfigurationsSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'production', 'test', 'local'])
     .default('development'),
+  SSL: z.boolean().default(false),
 });
 
 let appConfigurations: z.infer<typeof appConfigurationsSchema> = {};
@@ -51,6 +52,7 @@ try {
     API_URL: process.env.API_URL,
     JWT_KEY: process.env.JWT_KEY,
     API_PORT: parseInt(process.env.API_PORT),
+    SSL: process.env.NODE_ENV === 'production' ? true : false,
   });
 } catch (error) {
   if (error instanceof ZodError) {

@@ -13,6 +13,7 @@ const options: DataSourceOptions & SeederOptions = {
   entities: [`./**/*.entity.ts`],
   logging: appConfigurations.DB_LOGGING,
   synchronize: appConfigurations.DB_SYNCHRONIZE,
+  ssl: appConfigurations.SSL,
 
   seeds: [MainSeeder],
 };
