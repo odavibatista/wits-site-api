@@ -18,9 +18,7 @@ async function bootstrap() {
 
   const PORT = process.env.API_PORT;
 
-  if (process.env.NODE_ENV !== 'production') {
-    patchNestJsSwagger();
-  }
+  patchNestJsSwagger();
 
   const sharedDocument = SwaggerModule.createDocument(app, sharedSwaggerConfig);
 
