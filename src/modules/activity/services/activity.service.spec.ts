@@ -14,9 +14,18 @@ import { JWTProvider } from '../../user/providers/jwt.provider';
 import { CourseNotFoundException } from '../../course/domain/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
+import { UserRepository } from '../../user/repository/user.repository';
 
 describe('Activity Service Tests Suite', () => {
   let activityService: ActivityService;
+  
+  beforeEach(() => {
+    jest.useFakeTimers({ doNotFake: ['nextTick'] })
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -30,6 +39,8 @@ describe('Activity Service Tests Suite', () => {
         UserCourseConcludedRepository,
         ActivityRepository,
         UserActivityAnsweredRepository,
+        UserRepository,
+        ActivityService,
         JWTProvider,
       ],
     }).compile();

@@ -7,7 +7,6 @@ import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
 import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 import { UserScoreService } from '../../user-score/services/user-score.service';
 import { CourseRepository } from '../../course/repository/course.repository';
 

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserActivitiesAnsweredService } from './user-activities-answered.service';
 import { DatabaseModule } from '../../../database/database.module';
 import { UserModule } from '../../user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../user/entity/user.entity';
 import { UserScore } from '../../user-score/entity/user-score.entity';
 import { UserScoreService } from '../../user-score/services/user-score.service';
@@ -13,9 +13,21 @@ import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exc
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
 import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
 import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
+import { UserActivityAnsweredRepository } from '../repository/user-activities-answered.repository';
+import { ActivityRepository } from '../../activity/repository/activity.repository';
+import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { CourseRepository } from '../../course/repository/course.repository';
 
 describe('UserActivitiesAnsweredService', () => {
   let userActivitiesAnsweredService: UserActivitiesAnsweredService;
+  
+  beforeEach(() => {
+    jest.useFakeTimers({ doNotFake: ['nextTick'] })
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -28,7 +40,12 @@ describe('UserActivitiesAnsweredService', () => {
         UserScoreService,
         UserScoreRepository,
         UserRepository,
+        ActivityRepository,
+        CourseRepository,
         JWTProvider,
+        UserActivitiesAnsweredService,
+        UserCourseConcludedRepository,
+        UserActivityAnsweredRepository
       ],
     }).compile();
 

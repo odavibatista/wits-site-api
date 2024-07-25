@@ -16,11 +16,20 @@ import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRe
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
+import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 
 describe('UserService Test Suites', () => {
   let userService: UserService;
   let userClearingService: UserClearingService;
 
+  beforeEach(() => {
+    jest.useFakeTimers({ doNotFake: ['nextTick'] })
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
+  
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -39,6 +48,7 @@ describe('UserService Test Suites', () => {
         HashProvider,
         UserRepository,
         UserClearingService,
+        UserScoreRepository
       ],
       exports: [JWTProvider, HashProvider, UserService, UserClearingService],
     }).compile();

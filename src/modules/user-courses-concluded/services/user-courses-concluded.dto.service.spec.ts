@@ -4,6 +4,14 @@ import { UserCoursesConcludedDtoService } from './user-courses-concluded.dto.ser
 describe('UserCoursesConcludedDtoService', () => {
   let service: UserCoursesConcludedDtoService;
 
+  beforeEach(() => {
+    jest.useFakeTimers({ doNotFake: ['nextTick'] })
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
+  
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [UserCoursesConcludedDtoService],

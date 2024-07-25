@@ -7,7 +7,6 @@ import {
 } from '../domain/requests/FindCourses.request.dto';
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
-import { UserActivityAnsweredRepository } from '../../user-activities-answered/repository/user-activities-answered.repository';
 import {
   CreateCourseRequestDTO,
   CreateCourseResponseDTO,
@@ -28,7 +27,6 @@ export class CourseService {
     private readonly userCourseConcludedRepository: UserCourseConcludedRepository,
     private readonly activitiesRepository: ActivityRepository,
     private readonly userRepository: UserRepository,
-    private readonly userActivityAnsweredRepository: UserActivityAnsweredRepository,
   ) {}
 
   async getCourses(skip: number): Promise<FindCoursesResponseDTO[]> {
@@ -141,6 +139,12 @@ export class CourseService {
   ): Promise<
     EditCourseResponseDTO | CourseNotFoundException | UnprocessableDataException
   > {
+    const course = await this.courseRepository.findOne({
+      where: { id_course: id },
+    });
+
+    if (!course) throw new CourseNotFoundException();
+    
     if (!nameValidate(courseData.course_name))
       throw new UnprocessableDataException('Nome do curso inválido');
 
@@ -152,12 +156,6 @@ export class CourseService {
       throw new UnprocessableDataException(
         'Total de pontos deve ser um número inteiro positivo maior que 0 e não pode conter mais de 5 casas numéricas.',
       );
-
-    const course = await this.courseRepository.findOne({
-      where: { id_course: id },
-    });
-
-    if (!course) throw new CourseNotFoundException();
 
     course.course_name = courseData.course_name;
     course.points_worth = courseData.points_worth;

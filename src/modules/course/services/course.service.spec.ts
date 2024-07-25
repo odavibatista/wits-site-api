@@ -17,9 +17,18 @@ import {
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+import { UserRepository } from '../../user/repository/user.repository';
 
 describe('Course Service Automated Tests', () => {
   let courseService: CourseService;
+
+  beforeEach(() => {
+    jest.useFakeTimers({ doNotFake: ['nextTick'] })
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
+  })
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -34,6 +43,7 @@ describe('Course Service Automated Tests', () => {
         ActivityRepository,
         UserActivityAnsweredRepository,
         JWTProvider,
+        UserRepository
       ],
     }).compile();
 
@@ -43,7 +53,6 @@ describe('Course Service Automated Tests', () => {
   it('should bring a page of courses', async () => {
     const courses = await courseService.getCourses(1);
     expect(courses).toBeInstanceOf(Array);
-    expect(courses).toBeInstanceOf(FindCoursesResponseDTO);
   });
 
   it('should not bring the course data for an user if the user does not exist', async () => {
