@@ -24,9 +24,9 @@ export class UserScoreService {
 
     return top50Scores.map((score, index) => {
       return {
-        id: score.user_id,
-        username: users[index].username,
-        score: score.total_score,
+        id: ids[index],
+        username: users.find((user) => user.id === ids[index]).username,
+        score: top50Scores[index].total_score,
       };
     });
   }
