@@ -27,6 +27,7 @@ import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
+import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
 
 @Controller('user')
 @ApiTags('Usuário')
@@ -138,6 +139,48 @@ export class UserController {
     }
 
     const result = await this.userService.homeData(user.id);
+
+    if (result instanceof HttpException) {
+      return res.status(result.getStatus()).json({
+        message: result.message,
+        status: result.getStatus(),
+      });
+    } else {
+      return res.status(200).json(result);
+    }
+  }
+
+  @Get('/profile')
+  @ApiBearerAuth('user-token')
+  @ApiResponse({
+    status: new NotAuthenticatedException().getStatus(),
+    description: new UnauthorizedException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  @ApiResponse({
+    status: new UserNotFoundException().getStatus(),
+    description: new UserNotFoundException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Dados trazidos com sucesso.',
+    type: GetUserProfileResponseResponseDTO,
+  })
+  async getProfile(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<GetUserProfileResponseResponseDTO | AllExceptionsFilterDTO> {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(new NotAuthenticatedException().getStatus()).json({
+        message: new NotAuthenticatedException().message,
+        status: new NotAuthenticatedException().getStatus(),
+      });
+    }
+
+    const result = await this.userService.getProfile(user.id);
 
     if (result instanceof HttpException) {
       return res.status(result.getStatus()).json({

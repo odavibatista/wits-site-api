@@ -21,12 +21,15 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
+import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userScoreRepository: UserScoreRepository,
+    private readonly userCoursesConcludedRepository: UserCourseConcludedRepository,
     private jwtProvider: JWTProvider,
     private hashProvider: HashProvider,
   ) {}
@@ -161,6 +164,32 @@ export class UserService {
         score: userScore.total_score,
         role: user.role,
       },
+    };
+  }
+
+  async getProfile(id: number): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
+    const user = await this.userRepository.findOne({
+      where: { id_user: id },
+    });
+
+    if (!user) {
+      throw new UserNotFoundException();
+    }
+
+    const userScore = await this.userScoreRepository.findOne({
+      where: { user_id: id },
+    });
+
+    const courses_concluded = await this.userCoursesConcludedRepository.count({
+      where: { user_id: id },
+    })
+
+    return {
+      username: user.username,
+      email: user.email,
+      user_score: userScore.total_score,
+      courses_completed: courses_concluded,
+      member_since: String(user.created_at),
     };
   }
 }

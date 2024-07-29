@@ -18,6 +18,7 @@ import { UserScore } from '../user-score/entity/user-score.entity';
 import { UserRepository } from './repository/user.repository';
 import { UserScoreRepository } from '../user-score/repository/user-score-repository';
 import { AuthenticationMiddleware } from './middlewares/auth.middleware';
+import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AuthenticationMiddleware } from './middlewares/auth.middleware';
     UserClearingService,
     UserRepository,
     UserScoreRepository,
+    UserCourseConcludedRepository,
     JWTProvider,
     HashProvider,
   ],
@@ -44,6 +46,9 @@ export class UserModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthenticationMiddleware)
-      .forRoutes({ path: 'user/home-data', method: RequestMethod.GET });
+      .forRoutes(
+        { path: 'user/home-data', method: RequestMethod.GET },
+        { path: '/user/profile', method: RequestMethod.GET },
+      );
   }
 }
