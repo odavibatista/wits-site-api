@@ -49,6 +49,7 @@ export class UserModule implements NestModule {
       .forRoutes(
         { path: 'user/home-data', method: RequestMethod.GET },
         { path: '/user/profile', method: RequestMethod.GET },
+        { path: '/user/profile', method: RequestMethod.PATCH },
       );
   }
 }

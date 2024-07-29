@@ -193,12 +193,12 @@ export class UserService {
 
     if (!user)  throw new UserNotFoundException();
 
-    await this.userRepository.findByUsername(data.username, id).then((foundUser) => {
-      if(foundUser.id_user !== user.id_user) throw new UsernameAlreadyRegisteredException();
+    await this.userRepository.findByUsername(data.username).then((foundUser) => {
+      if(foundUser && foundUser?.id_user !== user.id_user) throw new UsernameAlreadyRegisteredException();
     })
 
-    await this.userRepository.findByEmail(data.email, id).then((foundUser) => {
-      if(foundUser.id_user !== user.id_user) throw new EmailAlreadyRegisteredException();
+    await this.userRepository.findByEmail(data.email).then((foundUser) => {
+      if(foundUser && foundUser?.id_user !== user.id_user) throw new EmailAlreadyRegisteredException();
     })
 
     if (

@@ -434,6 +434,18 @@ describe('UserService Test Suites', () => {
     }).rejects.toThrow(EmailAlreadyRegisteredException);
   })
 
+  it('should update the user`s profile given the valid credentials', async () => {
+    const user = {
+      email: 'ozezinhodasilva@gmail.com',
+      username: 'zezinho',
+    }
+
+    await userService.alterProfile(2, user).then(async (response) => {
+      expect(response).toHaveProperty('email');
+      expect(response).toHaveProperty('username');
+    })
+  })
+
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',
