@@ -21,4 +21,23 @@ export class UserRepository extends Repository<User> {
       username: user.username,
     }));
   }
+
+  async findById(id: number): Promise<User | null> {
+    return this.findOne({ where: { id_user: id } });
+  }
+
+  async findByUsername(username: string, id?: number): Promise<User | null> {
+    return this.findOne({
+      where: { username, id_user: id },
+    })
+  }
+
+  async findByEmail(email: string, id?: number): Promise<User | null> {
+    return this.findOne({ where: { email, id_user: id } });
+  }
+
+  async softDeleteById(id: string): Promise<true> {
+    await this.softDelete(id);
+    return
+  }
 }
