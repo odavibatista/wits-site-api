@@ -291,6 +291,39 @@ describe('UserService Test Suites', () => {
     })
   })
 
+  it('should not update the user`s profile given an unexistant id', async () => {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(0, user);
+    }).rejects.toThrow(UserNotFoundException);
+  })
+
+  it('should not update the user`s profile given an email with less than 10 characters', async () => {
+    const user = {
+      email: 'z@abc.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an email with more than 50 characters', async () => {
+    const user = {
+      email: 'zezinhodasilvacomumemailquesejamuitograndeaopontodelançarumaexceçaodaapietravetodoosistemakkkkkkkkk@abc.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',

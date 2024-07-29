@@ -21,4 +21,16 @@ export class UserRepository extends Repository<User> {
       username: user.username,
     }));
   }
+
+  async userNameIsInUse(username: string): Promise<boolean> {
+    const user = await this.findOne({ where: { username } });
+
+    return !!user;
+  }
+
+  async emailIsInUse(email: string): Promise<boolean> {
+    const user = await this.findOne({ where: { email } });
+
+    return !!user;
+  }
 }

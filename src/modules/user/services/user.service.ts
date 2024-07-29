@@ -194,7 +194,7 @@ export class UserService {
     };
   }
 
-  async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | UnprocessableDataException | UserNotFoundException> {
+  async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | EmailAlreadyRegisteredException | UsernameAlreadyRegisteredException | UnprocessableDataException | UserNotFoundException> {
     const user = await this.userRepository.findOne({
       where: { id_user: id },
     });
@@ -202,6 +202,10 @@ export class UserService {
     if (!user) {
       throw new UserNotFoundException();
     }
+
+    if(await this.userRepository.userNameIsInUse(data.username)) throw new UsernameAlreadyRegisteredException();
+
+    if(await this.userRepository.emailIsInUse(data.email)) throw new EmailAlreadyRegisteredException();
 
     if (
       !nameValidate(data.username) ||
