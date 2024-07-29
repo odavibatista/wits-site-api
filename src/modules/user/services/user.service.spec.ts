@@ -275,6 +275,22 @@ describe('UserService Test Suites', () => {
     });
   });
 
+  it('should not bring the user`s profile given an unexistant id', async () => {
+    expect(async () => {
+      await userService.getProfile(0);
+    }).rejects.toThrow(UserNotFoundException);
+  })
+
+  it('should bring the user`s profile given a valid id', async () => {
+    await userService.getProfile(2).then(async (response) => {
+      expect(response).toHaveProperty('username');
+      expect(response).toHaveProperty('email');
+      expect(response).toHaveProperty('user_score');
+      expect(response).toHaveProperty('courses_completed');
+      expect(response).toHaveProperty('member_since');
+    })
+  })
+
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',
