@@ -324,6 +324,83 @@ describe('UserService Test Suites', () => {
     }).rejects.toThrow(UnprocessableDataException);
   })
 
+  it('should not update the user`s profile given an email without a domain', async () => {
+    const user = {
+      email: 'zezinhodasilva',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an email without a username', async () => {
+    const user = {
+      email: '@gmail.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an uncompleted domain', async () => {
+    const user = {
+      email: 'zezinho@com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an username with less than 5 characters', async () => {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zez',
+    }
+    
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an username with more than 15 characters', async () => {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zezzezzezzezzezzezzezzezzez',
+    }
+    
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an username with special characters', async () => {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zezinho@!',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
+  it('should not update the user`s profile given an username with space characters', async () => {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zez in ho ',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UnprocessableDataException);
+  })
+
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',

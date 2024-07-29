@@ -22,6 +22,14 @@ export class UserRepository extends Repository<User> {
     }));
   }
 
+  async findById(id: number): Promise<User | null> {
+    return this.findOne({ where: { id_user: id } });
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return this.findOne({ where: { email } });
+  }
+
   async userNameIsInUse(username: string): Promise<boolean> {
     const user = await this.findOne({ where: { username } });
 

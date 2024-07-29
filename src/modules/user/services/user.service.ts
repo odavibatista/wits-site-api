@@ -148,9 +148,7 @@ export class UserService {
   async homeData(
     user_id: number,
   ): Promise<HomeDataResponseDTO | UserNotFoundException> {
-    const user = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const user = await this.userRepository.findById(user_id)
 
     if (!user) throw new UserNotFoundException();
 
@@ -169,9 +167,7 @@ export class UserService {
   }
 
   async getProfile(id: number): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
-    const user = await this.userRepository.findOne({
-      where: { id_user: id },
-    });
+    const user = await this.userRepository.findById(id)
 
     if (!user) {
       throw new UserNotFoundException();
@@ -195,17 +191,14 @@ export class UserService {
   }
 
   async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | EmailAlreadyRegisteredException | UsernameAlreadyRegisteredException | UnprocessableDataException | UserNotFoundException> {
-    const user = await this.userRepository.findOne({
-      where: { id_user: id },
-    });
+    const user = await this.userRepository.findById(id)
 
-    if (!user) {
-      throw new UserNotFoundException();
-    }
+    if (!user)  throw new UserNotFoundException();
 
     if(await this.userRepository.userNameIsInUse(data.username)) throw new UsernameAlreadyRegisteredException();
 
-    if(await this.userRepository.emailIsInUse(data.email)) throw new EmailAlreadyRegisteredException();
+    // Refactor this later...
+    //if(await this.userRepository.emailIsInUse(data.email)) throw new EmailAlreadyRegisteredException();
 
     if (
       !nameValidate(data.username) ||
