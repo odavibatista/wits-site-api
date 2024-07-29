@@ -112,9 +112,7 @@ export class UserService {
     if (!loginDto.username)
       throw new UnprocessableDataException('Nome de usuário inválido.');
 
-    const user = await this.userRepository.findOne({
-      where: { username: loginDto.username },
-    });
+    const user = await this.userRepository.findByUsername(loginDto.username);
 
     if (!user) throw new UserNotFoundException();
 
@@ -195,10 +193,13 @@ export class UserService {
 
     if (!user)  throw new UserNotFoundException();
 
-    if(await this.userRepository.userNameIsInUse(data.username)) throw new UsernameAlreadyRegisteredException();
+    await this.userRepository.findByUsername(data.username, id).then((foundUser) => {
+      if(foundUser.id_user !== user.id_user) throw new UsernameAlreadyRegisteredException();
+    })
 
-    // Refactor this later...
-    //if(await this.userRepository.emailIsInUse(data.email)) throw new EmailAlreadyRegisteredException();
+    await this.userRepository.findByEmail(data.email, id).then((foundUser) => {
+      if(foundUser.id_user !== user.id_user) throw new EmailAlreadyRegisteredException();
+    })
 
     if (
       !nameValidate(data.username) ||

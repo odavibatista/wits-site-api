@@ -401,6 +401,39 @@ describe('UserService Test Suites', () => {
     }).rejects.toThrow(UnprocessableDataException);
   })
 
+  it('should not update the user`s profile given an unexisting user id', async()  =>  {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(0, user);
+    }).rejects.toThrow(UserNotFoundException);
+  })
+
+  it('should not update the user`s profile given an username that already exists', async()  =>  {
+    const user = {
+      email: 'zezinhodasilva@gmail.com',
+      username: 'juliana',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(UsernameAlreadyRegisteredException);
+  })
+
+  it('should not update the user`s profile given an email that already exists', async()  =>  {
+    const user = {
+      email: 'julianaonebitcode@email.com',
+      username: 'zezinho',
+    }
+
+    expect(async () => {
+      await userService.alterProfile(2, user);
+    }).rejects.toThrow(EmailAlreadyRegisteredException);
+  })
+
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {
       email: 'joaozinhodasilva@gmail.com',
