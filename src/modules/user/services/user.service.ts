@@ -23,6 +23,7 @@ import { UserScoreRepository } from '../../user-score/repository/user-score-repo
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
+import { EditProfileRequestDTO, EditProfileResponseDTO } from '../domain/requests/EditProfile.request.dto';
 
 @Injectable()
 export class UserService {
@@ -191,6 +192,40 @@ export class UserService {
       courses_completed: courses_concluded,
       member_since: String(user.created_at),
     };
+  }
+
+  async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | UnprocessableDataException | UserNotFoundException> {
+    const user = await this.userRepository.findOne({
+      where: { id_user: id },
+    });
+
+    if (!user) {
+      throw new UserNotFoundException();
+    }
+
+    if (
+      !nameValidate(data.username) ||
+      data.username.length < 5 ||
+      data.username.length > 15
+    )
+      throw new UnprocessableDataException('Nome inválido.');
+
+    if (
+      !emailValidate(data.email) ||
+      data.email.length < 10 ||
+      data.email.length > 50
+    )
+      throw new UnprocessableDataException('Email inválido.');
+
+    await this.userRepository.update(id, {
+      username: data.username,
+      email: data.email,
+    })
+
+    return {
+      username: data.username,
+      email: data.email,
+    }
   }
 }
 
