@@ -13,10 +13,10 @@ export class UserScoreRepository extends Repository<UserScore> {
   }
 
   async addScore(user_id: number, score_to_add: number): Promise<void> {
-      const userScore = await this.findByUserId(user_id);
-  
-      userScore.total_score += score_to_add;
-  
-      await this.save(userScore);
+    const userScore = await this.findByUserId(user_id);
+
+    userScore.total_score += score_to_add;
+
+    await this.save(userScore);
   }
 }

@@ -35,17 +35,22 @@ export class UserActivitiesAnsweredService {
 
     if (!userExists) throw new UserNotFoundException();
 
-    const activityExists = await this.activitiesRepository.findById(activity_id);
+    const activityExists =
+      await this.activitiesRepository.findById(activity_id);
 
     if (!activityExists) throw new ActivityNotFoundException();
 
     const activityHasAlreadyBeenAnswered =
-      await this.userActivitiesAnsweredRepository.findAnsweredActivity(user_id, activity_id);
+      await this.userActivitiesAnsweredRepository.findAnsweredActivity(
+        user_id,
+        activity_id,
+      );
 
     if (activityHasAlreadyBeenAnswered)
       throw new ActivityAlreadyAnsweredException();
 
-    if (activityExists.correct_answer !== answer) throw new WrongAnswerException();
+    if (activityExists.correct_answer !== answer)
+      throw new WrongAnswerException();
 
     await this.userActivitiesAnsweredRepository.save({
       user_id,
@@ -62,13 +67,17 @@ export class UserActivitiesAnsweredService {
     user_id: number,
     course_id: number,
   ): Promise<void> {
-    const activities = await this.activitiesRepository.findByCourseId(course_id);
+    const activities =
+      await this.activitiesRepository.findByCourseId(course_id);
 
     const answered = [];
 
     for (const activity of activities) {
       const activityHasAlreadyBeenAnswered =
-        await this.userActivitiesAnsweredRepository.findAnsweredActivity(user_id, activity.id_activity);
+        await this.userActivitiesAnsweredRepository.findAnsweredActivity(
+          user_id,
+          activity.id_activity,
+        );
 
       activityHasAlreadyBeenAnswered
         ? answered.push(true)
