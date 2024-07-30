@@ -14,6 +14,8 @@ import {
 
 @Entity()
 class Activities {
+
+  /* Constructor for unit tests */
   constructor(id_activity: number, course_id: number, question: string, option_1: string, option_2: string, option_3: string, option_4: string, correct_answer: string) {
     this.id_activity = id_activity;
     this.course_id = course_id;

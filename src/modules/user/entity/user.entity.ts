@@ -3,6 +3,7 @@ import { Course } from '../../../modules/course/entity/course.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -16,6 +17,8 @@ export enum Role {
 
 @Entity()
 class Users {
+  
+  /* Constructor for unit tests */
   constructor(id_user: number, username: string, email: string, password: string, role: 'common' | 'admin') {
     this.id_user = id_user;
     this.username = username;
@@ -57,7 +60,7 @@ class Users {
   })
   role: string;
 
-  @Column({
+  @DeleteDateColumn({
     nullable: true,
   })
   deleted_at: string;
