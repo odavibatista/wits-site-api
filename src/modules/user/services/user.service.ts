@@ -182,15 +182,13 @@ export class UserService {
 
     const userScore = await this.userScoreRepository.findByUserId(id);
 
-    const courses_concluded = await this.userCoursesConcludedRepository.count({
-      where: { user_id: id },
-    });
+    const userConcludedCourses = await this.userCoursesConcludedRepository.countUserConcludedCourses(id)
 
     return {
       username: user.username,
       email: user.email,
       user_score: userScore.total_score,
-      courses_completed: courses_concluded,
+      courses_completed: userConcludedCourses,
       member_since: String(user.created_at),
     };
   }
