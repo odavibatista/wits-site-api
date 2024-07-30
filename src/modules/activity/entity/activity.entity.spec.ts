@@ -4,7 +4,7 @@ import { DatabaseModule } from '../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ActivityRepository } from '../repository/activity.repository';
 
-describe('ActivityEntity Test Suites', () => {
+describe('Activity Entity Test Suites', () => {
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
