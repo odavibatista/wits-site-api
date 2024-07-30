@@ -21,12 +21,16 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
+import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
+import { EditProfileRequestDTO, EditProfileResponseDTO } from '../domain/requests/EditProfile.request.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userScoreRepository: UserScoreRepository,
+    private readonly userCoursesConcludedRepository: UserCourseConcludedRepository,
     private jwtProvider: JWTProvider,
     private hashProvider: HashProvider,
   ) {}
@@ -108,9 +112,7 @@ export class UserService {
     if (!loginDto.username)
       throw new UnprocessableDataException('Nome de usuário inválido.');
 
-    const user = await this.userRepository.findOne({
-      where: { username: loginDto.username },
-    });
+    const user = await this.userRepository.findByUsername(loginDto.username);
 
     if (!user) throw new UserNotFoundException();
 
@@ -144,9 +146,7 @@ export class UserService {
   async homeData(
     user_id: number,
   ): Promise<HomeDataResponseDTO | UserNotFoundException> {
-    const user = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const user = await this.userRepository.findById(user_id)
 
     if (!user) throw new UserNotFoundException();
 
@@ -162,6 +162,68 @@ export class UserService {
         role: user.role,
       },
     };
+  }
+
+  async getProfile(id: number): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
+    const user = await this.userRepository.findById(id)
+
+    if (!user) {
+      throw new UserNotFoundException();
+    }
+
+    const userScore = await this.userScoreRepository.findOne({
+      where: { user_id: id },
+    });
+
+    const courses_concluded = await this.userCoursesConcludedRepository.count({
+      where: { user_id: id },
+    })
+
+    return {
+      username: user.username,
+      email: user.email,
+      user_score: userScore.total_score,
+      courses_completed: courses_concluded,
+      member_since: String(user.created_at),
+    };
+  }
+
+  async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | EmailAlreadyRegisteredException | UsernameAlreadyRegisteredException | UnprocessableDataException | UserNotFoundException> {
+    const user = await this.userRepository.findById(id)
+
+    if (!user)  throw new UserNotFoundException();
+
+    await this.userRepository.findByUsername(data.username).then((foundUser) => {
+      if(foundUser && foundUser?.id_user !== user.id_user) throw new UsernameAlreadyRegisteredException();
+    })
+
+    await this.userRepository.findByEmail(data.email).then((foundUser) => {
+      if(foundUser && foundUser?.id_user !== user.id_user) throw new EmailAlreadyRegisteredException();
+    })
+
+    if (
+      !nameValidate(data.username) ||
+      data.username.length < 5 ||
+      data.username.length > 15
+    )
+      throw new UnprocessableDataException('Nome inválido.');
+
+    if (
+      !emailValidate(data.email) ||
+      data.email.length < 10 ||
+      data.email.length > 50
+    )
+      throw new UnprocessableDataException('Email inválido.');
+
+    await this.userRepository.update(id, {
+      username: data.username,
+      email: data.email,
+    })
+
+    return {
+      username: data.username,
+      email: data.email,
+    }
   }
 }
 
