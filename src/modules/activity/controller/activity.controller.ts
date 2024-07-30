@@ -22,7 +22,10 @@ import { CommonException } from '../../../shared/domain/errors/Common.exception'
 import { Request, Response } from 'express';
 import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
 import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
-import { EditActivityRequestDTO, EditActivityResponseDTO } from '../domain/requests/EditActivity.request.dto';
+import {
+  EditActivityRequestDTO,
+  EditActivityResponseDTO,
+} from '../domain/requests/EditActivity.request.dto';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
 import { GetActivityResponseDTO } from '../domain/requests/GetActivity.request.dto';
 

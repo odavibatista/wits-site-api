@@ -29,7 +29,10 @@ import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
 import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
-import { EditProfileRequestDTO, EditProfileResponseDTO } from '../domain/requests/EditProfile.request.dto';
+import {
+  EditProfileRequestDTO,
+  EditProfileResponseDTO,
+} from '../domain/requests/EditProfile.request.dto';
 
 @Controller('user')
 @ApiTags('Usuário')
@@ -214,7 +217,7 @@ export class UserController {
   async updateProfile(
     @Req() req: Request,
     @Res() res: Response,
-    @Body() body: EditProfileRequestDTO
+    @Body() body: EditProfileRequestDTO,
   ): Promise<EditProfileResponseDTO | AllExceptionsFilterDTO> {
     const user = req.user;
 

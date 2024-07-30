@@ -29,6 +29,7 @@ export class CourseService {
     private readonly userRepository: UserRepository,
   ) {}
 
+  /* Finding all the courses in the database, with 20 courses per page */
   async getCourses(skip: number): Promise<FindCoursesResponseDTO[]> {
     const courses = await this.courseRepository.find({
       order: { created_at: 'DESC' },
@@ -38,9 +39,8 @@ export class CourseService {
 
     const coursesWithActivities = await Promise.all(
       courses.map(async (course) => {
-        const totalOfActivities = await this.activitiesRepository.count({
-          where: { course_id: course.id_course },
-        });
+        const totalOfActivities =
+          await this.activitiesRepository.countByCourseId(course.id_course);
 
         return {
           ...course,
@@ -52,6 +52,7 @@ export class CourseService {
     return coursesWithActivities;
   }
 
+  /* Finding a specific course in the database */
   async getCourseData(
     user_id: number,
     course_id: number,
@@ -60,24 +61,18 @@ export class CourseService {
     | UserNotFoundException
     | CourseNotFoundException
   > {
-    const user = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) throw new UserNotFoundException();
 
-    const course = await this.courseRepository.findOne({
-      where: { id_course: course_id },
-    });
+    const course = await this.courseRepository.findById(course_id);
 
     if (!course) throw new CourseNotFoundException();
 
-    const userConcluded = await this.userCourseConcludedRepository.findOne({
-      where: { user_id: user_id, course_id: course_id },
-    });
+    const userConcluded = await this.userCourseConcludedRepository.findConcludedCourse(user_id, course_id)
 
     const activities = (
-      await this.activitiesRepository.find({ where: { course_id: course_id } })
+      await this.activitiesRepository.findByCourseId(course_id)
     ).map(async (activity) => {
       return {
         id_activity: activity.id_activity,
@@ -101,6 +96,7 @@ export class CourseService {
     };
   }
 
+  /* Creating a new course in the database if the criteria is met */
   async createCourse(
     courseData: CreateCourseRequestDTO,
   ): Promise<CreateCourseResponseDTO | UnprocessableDataException> {
@@ -133,18 +129,17 @@ export class CourseService {
     };
   }
 
+  /* Editing a course in the database if the criteria is met */
   async editCourse(
     id: number,
     courseData: EditCourseRequestDTO,
   ): Promise<
     EditCourseResponseDTO | CourseNotFoundException | UnprocessableDataException
   > {
-    const course = await this.courseRepository.findOne({
-      where: { id_course: id },
-    });
+    const course = await this.courseRepository.findById(id);
 
     if (!course) throw new CourseNotFoundException();
-    
+
     if (!nameValidate(courseData.course_name))
       throw new UnprocessableDataException('Nome do curso inválido');
 
@@ -176,10 +171,9 @@ export class CourseService {
     };
   }
 
+  /* Removing a course from the database if the course exists */
   async removeCourse(id: number): Promise<void | CourseNotFoundException> {
-    const course = await this.courseRepository.findOne({
-      where: { id_course: id },
-    });
+    const course = await this.courseRepository.findById(id);
 
     if (!course) throw new CourseNotFoundException();
 

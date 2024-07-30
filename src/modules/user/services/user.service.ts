@@ -23,7 +23,10 @@ import { UserScoreRepository } from '../../user-score/repository/user-score-repo
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
-import { EditProfileRequestDTO, EditProfileResponseDTO } from '../domain/requests/EditProfile.request.dto';
+import {
+  EditProfileRequestDTO,
+  EditProfileResponseDTO,
+} from '../domain/requests/EditProfile.request.dto';
 
 @Injectable()
 export class UserService {
@@ -35,6 +38,7 @@ export class UserService {
     private hashProvider: HashProvider,
   ) {}
 
+  /* This service registers the user in the database if all the criterias are met */
   async register(
     credentials: CreateUserRequestDTO,
   ): Promise<
@@ -59,24 +63,26 @@ export class UserService {
     if (!passwordValidate(credentials.password))
       throw new UnprocessableDataException('Senha inválida.');
 
-    const userWithSameEmail = await this.userRepository.findOne({
-      where: { email: credentials.email },
-    });
+    await this.userRepository
+      .findByUsername(credentials.username)
+      .then((foundUser) => {
+        if (foundUser && foundUser?.id_user !== user.id_user)
+          throw new UsernameAlreadyRegisteredException();
+      });
 
-    if (userWithSameEmail) throw new EmailAlreadyRegisteredException();
+    await this.userRepository
+      .findByEmail(credentials.email)
+      .then((foundUser) => {
+        if (foundUser && foundUser?.id_user !== user.id_user)
+          throw new EmailAlreadyRegisteredException();
+      });
 
-    const userWithSameUsername = await this.userRepository.findOne({
-      where: { username: credentials.username },
-    });
-
-    if (userWithSameUsername) throw new UsernameAlreadyRegisteredException();
-
-    const password = await this.hashProvider.hash(credentials.password);
+    const hash = await this.hashProvider.hash(credentials.password);
 
     const user = await this.userRepository.save({
       username: credentials.username,
       email: credentials.email,
-      password: password,
+      password: hash,
       role: 'common',
     });
 
@@ -104,6 +110,7 @@ export class UserService {
     return response;
   }
 
+  /* This will compare the credentials with the ones in the database and give the auth token it the password is correct */
   async login(
     loginDto: LoginUserBodyDTO,
   ): Promise<
@@ -143,16 +150,15 @@ export class UserService {
     }
   }
 
+  /* Validating the user's existance. This will be used as an auxiliary endpoint for user data and session in the front-end. */
   async homeData(
     user_id: number,
   ): Promise<HomeDataResponseDTO | UserNotFoundException> {
-    const user = await this.userRepository.findById(user_id)
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) throw new UserNotFoundException();
 
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: user_id },
-    });
+    const userScore = await this.userScoreRepository.findByUserId(user_id);
 
     return {
       user: {
@@ -164,42 +170,55 @@ export class UserService {
     };
   }
 
-  async getProfile(id: number): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
-    const user = await this.userRepository.findById(id)
+  /* Getting all the data for the user's profile, so it can be shown in the front-end's user profile page. */
+  async getProfile(
+    id: number,
+  ): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new UserNotFoundException();
     }
 
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: id },
-    });
+    const userScore = await this.userScoreRepository.findByUserId(id);
 
-    const courses_concluded = await this.userCoursesConcludedRepository.count({
-      where: { user_id: id },
-    })
+    const userConcludedCourses = await this.userCoursesConcludedRepository.countUserConcludedCourses(id)
 
     return {
       username: user.username,
       email: user.email,
       user_score: userScore.total_score,
-      courses_completed: courses_concluded,
+      courses_completed: userConcludedCourses,
       member_since: String(user.created_at),
     };
   }
 
-  async alterProfile(id: number, data: EditProfileRequestDTO): Promise<EditProfileResponseDTO | EmailAlreadyRegisteredException | UsernameAlreadyRegisteredException | UnprocessableDataException | UserNotFoundException> {
-    const user = await this.userRepository.findById(id)
+  /* Receiving data to change the data from a single user's profile */
+  async alterProfile(
+    id: number,
+    data: EditProfileRequestDTO,
+  ): Promise<
+    | EditProfileResponseDTO
+    | EmailAlreadyRegisteredException
+    | UsernameAlreadyRegisteredException
+    | UnprocessableDataException
+    | UserNotFoundException
+  > {
+    const user = await this.userRepository.findById(id);
 
-    if (!user)  throw new UserNotFoundException();
+    if (!user) throw new UserNotFoundException();
 
-    await this.userRepository.findByUsername(data.username).then((foundUser) => {
-      if(foundUser && foundUser?.id_user !== user.id_user) throw new UsernameAlreadyRegisteredException();
-    })
+    await this.userRepository
+      .findByUsername(data.username)
+      .then((foundUser) => {
+        if (foundUser && foundUser?.id_user !== user.id_user)
+          throw new UsernameAlreadyRegisteredException();
+      });
 
     await this.userRepository.findByEmail(data.email).then((foundUser) => {
-      if(foundUser && foundUser?.id_user !== user.id_user) throw new EmailAlreadyRegisteredException();
-    })
+      if (foundUser && foundUser?.id_user !== user.id_user)
+        throw new EmailAlreadyRegisteredException();
+    });
 
     if (
       !nameValidate(data.username) ||
@@ -218,12 +237,21 @@ export class UserService {
     await this.userRepository.update(id, {
       username: data.username,
       email: data.email,
-    })
+    });
 
     return {
       username: data.username,
       email: data.email,
-    }
+    };
+  }
+
+  /* This will be used for the user to delete his own account using a soft delete method */
+  async softDelete(id: number): Promise<void | UserNotFoundException> {
+    const user = await this.userRepository.findById(id);
+
+    if (!user) throw new UserNotFoundException();
+
+    await this.userRepository.softDeleteById(id);
   }
 }
 
