@@ -158,9 +158,7 @@ export class UserService {
 
     if (!user) throw new UserNotFoundException();
 
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: user_id },
-    });
+    const userScore = await this.userScoreRepository.findByUserId(user_id);
 
     return {
       user: {
@@ -182,9 +180,7 @@ export class UserService {
       throw new UserNotFoundException();
     }
 
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: id },
-    });
+    const userScore = await this.userScoreRepository.findByUserId(id);
 
     const courses_concluded = await this.userCoursesConcludedRepository.count({
       where: { user_id: id },

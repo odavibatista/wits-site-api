@@ -7,4 +7,8 @@ export class UserScoreRepository extends Repository<UserScore> {
   constructor(private dataSource: DataSource) {
     super(UserScore, dataSource.createEntityManager());
   }
+
+  async findByUserId(user_id: number): Promise<UserScore | null> {
+    return this.findOne({ where: { user_id } });
+  }
 }
