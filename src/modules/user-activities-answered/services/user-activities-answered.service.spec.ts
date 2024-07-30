@@ -20,14 +20,14 @@ import { CourseRepository } from '../../course/repository/course.repository';
 
 describe('UserActivitiesAnsweredService', () => {
   let userActivitiesAnsweredService: UserActivitiesAnsweredService;
-  
+
   beforeEach(() => {
-    jest.useFakeTimers({ doNotFake: ['nextTick'] })
-  })
+    jest.useFakeTimers({ doNotFake: ['nextTick'] });
+  });
 
   afterAll(() => {
-    jest.useRealTimers()
-  })
+    jest.useRealTimers();
+  });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -45,7 +45,7 @@ describe('UserActivitiesAnsweredService', () => {
         JWTProvider,
         UserActivitiesAnsweredService,
         UserCourseConcludedRepository,
-        UserActivityAnsweredRepository
+        UserActivityAnsweredRepository,
       ],
     }).compile();
 
@@ -60,9 +60,13 @@ describe('UserActivitiesAnsweredService', () => {
     const answer = '1';
 
     expect(async () => {
-      await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+      await userActivitiesAnsweredService.answerQuestion(
+        user_id,
+        activity_id,
+        answer,
+      );
     }).rejects.toThrow(UserNotFoundException);
-  })
+  });
 
   it('should not answer a question passing an activity_id that does not exist', async () => {
     const user_id = 1;
@@ -70,21 +74,33 @@ describe('UserActivitiesAnsweredService', () => {
     const answer = '1';
 
     expect(async () => {
-      await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+      await userActivitiesAnsweredService.answerQuestion(
+        user_id,
+        activity_id,
+        answer,
+      );
     }).rejects.toThrow(ActivityNotFoundException);
-  })
+  });
 
   it('should not answer a question that has already been answered', async () => {
     const user_id = 1;
     const activity_id = 1;
     const answer = '4';
 
-    await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+    await userActivitiesAnsweredService.answerQuestion(
+      user_id,
+      activity_id,
+      answer,
+    );
 
     expect(async () => {
-      await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+      await userActivitiesAnsweredService.answerQuestion(
+        user_id,
+        activity_id,
+        answer,
+      );
     }).rejects.toThrow(ActivityAlreadyAnsweredException);
-  })
+  });
 
   it('should not answer a question with a wrong answer', async () => {
     const user_id = 1;
@@ -92,17 +108,25 @@ describe('UserActivitiesAnsweredService', () => {
     const answer = '5';
 
     expect(async () => {
-      await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+      await userActivitiesAnsweredService.answerQuestion(
+        user_id,
+        activity_id,
+        answer,
+      );
     }).rejects.toThrow(WrongAnswerException);
-  })
+  });
 
   it('should answer a question with a correct answer', async () => {
     const user_id = 1;
     const activity_id = 2;
     const answer = '4';
 
-    const result = await userActivitiesAnsweredService.answerQuestion(user_id, activity_id, answer);
+    const result = await userActivitiesAnsweredService.answerQuestion(
+      user_id,
+      activity_id,
+      answer,
+    );
 
     expect(result).toBe(true);
-  })
+  });
 });

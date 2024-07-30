@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, In, Repository } from 'typeorm';
+import { DataSource, FindOptionsOrder, In, Repository } from 'typeorm';
 import { Course } from '../entity/course.entity';
 import { FindMultipleCoursesResponseDTO } from '../domain/requests/FindMultipleCourses.request.dto';
+import { Activity } from '../../activity/entity/activity.entity';
 
 @Injectable()
 export class CourseRepository extends Repository<Course> {
@@ -23,16 +24,18 @@ export class CourseRepository extends Repository<Course> {
     return this.count({ where: { id_course: id } });
   }
 
-  async softDeleteById(id: string): Promise<true> {
-    await this.softDelete(id);
-    return
+  async softDeleteById(id: number): Promise<true> {
+    await this.softDelete({ id_course: id });
+    return;
   }
 
   async bringCoursesCollection(
     course_ids: number[],
+    order?: FindOptionsOrder<Course>,
   ): Promise<FindMultipleCoursesResponseDTO> {
     const courses = await this.find({
       where: { id_course: In(course_ids) },
+      order,
     });
 
     return courses.map((course) => ({

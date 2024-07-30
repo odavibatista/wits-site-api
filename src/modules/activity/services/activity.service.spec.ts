@@ -18,14 +18,14 @@ import { UserRepository } from '../../user/repository/user.repository';
 
 describe('Activity Service Tests Suite', () => {
   let activityService: ActivityService;
-  
+
   beforeEach(() => {
-    jest.useFakeTimers({ doNotFake: ['nextTick'] })
-  })
+    jest.useFakeTimers({ doNotFake: ['nextTick'] });
+  });
 
   afterAll(() => {
-    jest.useRealTimers()
-  })
+    jest.useRealTimers();
+  });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -63,7 +63,7 @@ describe('Activity Service Tests Suite', () => {
     expect(async () => {
       await activityService.getActivity(0);
     }).rejects.toThrow(ActivityNotFoundException);
-  })
+  });
 
   it('should bring the activity given a valid id', async () => {
     const activity = await activityService.getActivity(1);
@@ -76,9 +76,9 @@ describe('Activity Service Tests Suite', () => {
     expect(activity).toHaveProperty('option_3');
     expect(activity).toHaveProperty('option_4');
     expect(activity).toHaveProperty('correct_answer');
-    expect(activity).toHaveProperty('created_at')
-    expect(activity).toHaveProperty('updated_at')
-  })
+    expect(activity).toHaveProperty('created_at');
+    expect(activity).toHaveProperty('updated_at');
+  });
 
   it('should not create an activity if the course does not exist', async () => {
     expect(async () => {
@@ -154,7 +154,7 @@ describe('Activity Service Tests Suite', () => {
     expect(activity).toHaveProperty('option_3');
     expect(activity).toHaveProperty('option_4');
     expect(activity).toHaveProperty('correct_answer');
-    expect(activity).toHaveProperty('created_at')
+    expect(activity).toHaveProperty('created_at');
   });
 
   it('should not edit an activity if the activity does not exist', async () => {
@@ -226,7 +226,7 @@ describe('Activity Service Tests Suite', () => {
     expect(activity).toHaveProperty('option_3');
     expect(activity).toHaveProperty('option_4');
     expect(activity).toHaveProperty('correct_answer');
-    expect(activity).toHaveProperty('created_at')
+    expect(activity).toHaveProperty('created_at');
   });
 
   it('should not remove an activity if the activity does not exist', async () => {

@@ -24,7 +24,7 @@ import { appConfigurations } from '../shared/config/app.config';
         synchronize: appConfigurations.DB_SYNCHRONIZE,
         logging: appConfigurations.DB_LOGGING,
         logger: 'advanced-console',
-        ssl: appConfigurations.SSL 
+        ssl: appConfigurations.SSL,
       }),
     }),
   ],

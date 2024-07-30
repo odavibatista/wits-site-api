@@ -23,12 +23,12 @@ describe('Course Service Automated Tests', () => {
   let courseService: CourseService;
 
   beforeEach(() => {
-    jest.useFakeTimers({ doNotFake: ['nextTick'] })
-  })
+    jest.useFakeTimers({ doNotFake: ['nextTick'] });
+  });
 
   afterAll(() => {
-    jest.useRealTimers()
-  })
+    jest.useRealTimers();
+  });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -43,7 +43,7 @@ describe('Course Service Automated Tests', () => {
         ActivityRepository,
         UserActivityAnsweredRepository,
         JWTProvider,
-        UserRepository
+        UserRepository,
       ],
     }).compile();
 

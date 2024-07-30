@@ -24,15 +24,12 @@ export class ActivityService {
   async getActivities(
     course_id: number,
   ): Promise<Activity[] | CourseNotFoundException> {
-    const course = await this.courseRepository.findOne({
-      where: { id_course: course_id },
-    });
+    const course = await this.courseRepository.findById(course_id);
 
     if (!course) throw new CourseNotFoundException();
 
-    return await this.activityRepository.find({
-      where: { course_id },
-      order: { created_at: 'ASC' },
+    return await this.activityRepository.findByCourseId(course_id, {
+      created_at: 'ASC',
     });
   }
 
@@ -50,9 +47,7 @@ export class ActivityService {
         'Insira o número válido da resposta correta (entre 1 e 4).',
       );
 
-    const course = await this.courseRepository.findOne({
-      where: { id_course: activityData.course_id },
-    });
+    const course = await this.courseRepository.findById(activityData.course_id);
 
     if (!course) throw new CourseNotFoundException();
 
@@ -62,9 +57,7 @@ export class ActivityService {
   }
 
   async getActivity(id: number): Promise<Activity | ActivityNotFoundException> {
-    const activity = await this.activityRepository.findOne({
-      where: { id_activity: id },
-    });
+    const activity = await this.activityRepository.findById(id);
 
     if (!activity) throw new ActivityNotFoundException();
 
@@ -86,9 +79,7 @@ export class ActivityService {
         'Insira o número válido da resposta correta (entre 1 e 4).',
       );
 
-    const activity = await this.activityRepository.findOne({
-      where: { id_activity: id },
-    });
+    const activity = await this.activityRepository.findById(id);
 
     if (!activity) throw new ActivityNotFoundException();
 
@@ -98,9 +89,7 @@ export class ActivityService {
   }
 
   async removeActivity(id: number): Promise<void | ActivityNotFoundException> {
-    const activity = await this.activityRepository.findOne({
-      where: { id_activity: id },
-    });
+    const activity = await this.activityRepository.findById(id);
 
     if (!activity) throw new ActivityNotFoundException();
 

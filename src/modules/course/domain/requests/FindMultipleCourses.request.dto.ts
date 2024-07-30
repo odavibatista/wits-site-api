@@ -13,9 +13,9 @@ export const FindMultipleCoursesResponseSchema = z.object({
 });
 
 export const MultipleCoursesCollectionResponseSchema = z.array(
-    FindMultipleCoursesResponseSchema,
-)
+  FindMultipleCoursesResponseSchema,
+);
 
 export class FindMultipleCoursesResponseDTO extends createZodDto(
-    MultipleCoursesCollectionResponseSchema,
+  MultipleCoursesCollectionResponseSchema,
 ) {}
