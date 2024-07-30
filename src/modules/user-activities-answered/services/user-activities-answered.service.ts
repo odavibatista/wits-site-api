@@ -31,32 +31,21 @@ export class UserActivitiesAnsweredService {
     | ActivityAlreadyAnsweredException
     | UserNotFoundException
   > {
-    const userExists = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const userExists = await this.userRepository.findById(user_id);
 
     if (!userExists) throw new UserNotFoundException();
 
-    const activityExists = await this.activitiesRepository.findOne({
-      where: { id_activity: activity_id },
-    });
+    const activityExists = await this.activitiesRepository.findById(activity_id);
 
     if (!activityExists) throw new ActivityNotFoundException();
 
     const activityHasAlreadyBeenAnswered =
-      await this.userActivitiesAnsweredRepository.findOne({
-        where: {
-          activity_id,
-          user_id,
-        },
-      });
+      await this.userActivitiesAnsweredRepository.findAnsweredActivity(user_id, activity_id);
 
     if (activityHasAlreadyBeenAnswered)
       throw new ActivityAlreadyAnsweredException();
 
-    const isCorrect = activityExists.correct_answer === answer;
-
-    if (!isCorrect) throw new WrongAnswerException();
+    if (activityExists.correct_answer !== answer) throw new WrongAnswerException();
 
     await this.userActivitiesAnsweredRepository.save({
       user_id,
@@ -68,24 +57,18 @@ export class UserActivitiesAnsweredService {
     return true;
   }
 
+  /* This method will see if the user has already finished all the activities from a course. If he did, the course will be marked as completed for the user and their score will be increased by the points the course gives. */
   async verifyCourseConclusion(
     user_id: number,
     course_id: number,
   ): Promise<void> {
-    const activities = await this.activitiesRepository.find({
-      where: { course_id },
-    });
+    const activities = await this.activitiesRepository.findByCourseId(course_id);
 
     const answered = [];
 
     for (const activity of activities) {
       const activityHasAlreadyBeenAnswered =
-        await this.userActivitiesAnsweredRepository.findOne({
-          where: {
-            activity_id: activity.id_activity,
-            user_id,
-          },
-        });
+        await this.userActivitiesAnsweredRepository.findAnsweredActivity(user_id, activity.id_activity);
 
       activityHasAlreadyBeenAnswered
         ? answered.push(true)
@@ -98,9 +81,7 @@ export class UserActivitiesAnsweredService {
         course_id,
       });
 
-      const courseScore = await this.courseRepository.findOne({
-        where: { id_course: course_id },
-      });
+      const courseScore = await this.courseRepository.findById(course_id);
 
       await this.userScoreService.updateScore(
         user_id,

@@ -11,4 +11,12 @@ export class UserScoreRepository extends Repository<UserScore> {
   async findByUserId(user_id: number): Promise<UserScore | null> {
     return this.findOne({ where: { user_id } });
   }
+
+  async addScore(user_id: number, score_to_add: number): Promise<void> {
+      const userScore = await this.findByUserId(user_id);
+  
+      userScore.total_score += score_to_add;
+  
+      await this.save(userScore);
+  }
 }

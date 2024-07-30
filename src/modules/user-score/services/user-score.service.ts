@@ -58,10 +58,6 @@ export class UserScoreService {
 
     if (!userScoreExists) throw new UserNotFoundException();
 
-    const userScore = await this.userScoreRepository.findByUserId(user_id);
-
-    userScore.total_score += score_to_add;
-
-    await this.userScoreRepository.save(userScore);
+    await this.userScoreRepository.addScore(user_id, score_to_add);
   }
 }
