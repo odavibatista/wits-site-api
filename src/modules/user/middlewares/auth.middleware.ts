@@ -3,6 +3,7 @@ import { JWTProvider } from '../providers/jwt.provider';
 import { NextFunction, Request } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
+import { BadTokenEception } from '../../../shared/domain/errors/BadToken.exception';
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
@@ -13,19 +14,23 @@ export class AuthenticationMiddleware implements NestMiddleware {
     if (authHeaders) {
       const token = authHeaders.replace(/Bearer /, '');
 
-      const decoded = this.jwtProvider.validate({
-        token,
-        secret: String(process.env.JWT_KEY),
-      });
+      try {
+        const decoded = this.jwtProvider.validate({
+          token,
+          secret: String(process.env.JWT_KEY),
+        });
 
-      const { id, role } = decoded as JwtPayload;
+        const { id, role } = decoded as JwtPayload;
 
-      req.user = {
-        id,
-        role,
-      };
+        req.user = {
+          id,
+          role,
+        };
 
-      next();
+        next();
+      } catch (error) {
+        throw new BadTokenEception();
+      }
     } else {
       throw new NotAuthenticatedException();
     }

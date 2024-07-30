@@ -8,9 +8,12 @@ export class UserCourseConcludedRepository extends Repository<UserCourseConclude
     super(UserCourseConcluded, dataSource.createEntityManager());
   }
 
-  async findConcludedCourse(user_id: number, course_id: number): Promise<UserCourseConcluded> {
+  async findConcludedCourse(
+    user_id: number,
+    course_id: number,
+  ): Promise<UserCourseConcluded> {
     return this.findOne({
-      where: { user_id, course_id }
+      where: { user_id, course_id },
     });
   }
 
