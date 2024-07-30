@@ -1,11 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { Course } from './course.entity';
-import { DatabaseModule } from '../../../database/database.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CourseRepository } from '../repository/course.repository';
 
 describe('Course Entity Test Suites', () => {
-
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
   });
@@ -13,17 +8,6 @@ describe('Course Entity Test Suites', () => {
   afterAll(() => {
     jest.useRealTimers();
   });
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        DatabaseModule,
-        TypeOrmModule.forFeature([Course]),
-      ],
-      providers: [
-        CourseRepository,
-      ],
-    }).compile();
 
     const course = new Course(1, 'Course Name', 100)
 
@@ -59,6 +43,4 @@ describe('Course Entity Test Suites', () => {
     it('an instance of the Course class should have its updated_at attribute being of type Date', async () => {
       expect(course.updated_at).toEqual(expect.any(Date))
     })
-
-  });
 });

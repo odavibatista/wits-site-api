@@ -1,30 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { Activity } from './activity.entity';
-import { DatabaseModule } from '../../../database/database.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ActivityRepository } from '../repository/activity.repository';
 
 describe('Activity Entity Test Suites', () => {
-
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
   });
 
   afterAll(() => {
     jest.useRealTimers();
-  });
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        DatabaseModule,
-        TypeOrmModule.forFeature([Activity]),
-      ],
-      providers: [
-        ActivityRepository,
-      ],
-    }).compile();
-
   });
 
   const activity = new Activity(1, 1, 'Question', 'Option 1', 'Option 2', 'Option 3', 'Option 4', '1')

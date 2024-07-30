@@ -16,6 +16,17 @@ export enum Role {
 
 @Entity()
 class Users {
+  constructor(id_user: number, username: string, email: string, password: string, role: 'common' | 'admin') {
+    this.id_user = id_user;
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.role = role;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = null
+  }
+
   @ManyToMany(() => Course, (course) => course.id_course)
   @ManyToMany(() => Activity, (activity) => activity.id_activity)
   @PrimaryGeneratedColumn()
