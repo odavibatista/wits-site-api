@@ -2,6 +2,7 @@ import { Course } from '../../../modules/course/entity/course.entity';
 import { User } from '../../../modules/user/entity/user.entity';
 import {
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -11,6 +12,16 @@ import {
 
 @Entity()
 class UserCoursesConcluded {
+  
+  /* Constructor for unit tests */
+  constructor(user_id: number, course_id: number) {
+    this.user_id = user_id;
+    this.course_id = course_id;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = null;
+  }
+
   @PrimaryColumn()
   user_id: number;
 
@@ -24,6 +35,11 @@ class UserCoursesConcluded {
   @ManyToOne(() => Course, (course) => course.id_course)
   @JoinColumn({ name: 'course_id' })
   course: Course;
+
+  @DeleteDateColumn({
+    nullable: true,
+  })
+  deleted_at: string;
 
   @CreateDateColumn({
     nullable: false,

@@ -11,6 +11,17 @@ import {
 
 @Entity()
 class Courses {
+
+  /* Constructor for unit tests */
+  constructor(id_course: number, course_name: string, points_worth: number) {
+    this.id_course = id_course;
+    this.course_name = course_name;
+    this.points_worth = points_worth;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = null;
+  }
+
   @ManyToMany(() => User, (user) => user.id_user)
   @PrimaryGeneratedColumn()
   id_course: number;
