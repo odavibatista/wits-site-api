@@ -14,6 +14,20 @@ import {
 
 @Entity()
 class Activities {
+  constructor(id_activity: number, course_id: number, question: string, option_1: string, option_2: string, option_3: string, option_4: string, correct_answer: string) {
+    this.id_activity = id_activity;
+    this.course_id = course_id;
+    this.question = question;
+    this.option_1 = option_1;
+    this.option_2 = option_2;
+    this.option_3 = option_3;
+    this.option_4 = option_4;
+    this.correct_answer = correct_answer;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = null
+  }
+
   @ManyToMany(() => User, (user) => user.id_user)
   @PrimaryGeneratedColumn()
   id_activity: number;
