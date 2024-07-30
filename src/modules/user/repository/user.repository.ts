@@ -9,19 +9,6 @@ export class UserRepository extends Repository<User> {
     super(User, dataSource.createEntityManager());
   }
 
-  async bringUsersCollection(
-    user_ids: number[],
-  ): Promise<MultipleUserCollectionResponseDTO> {
-    const users = await this.find({
-      where: { id_user: In(user_ids) },
-    });
-
-    return users.map((user) => ({
-      id: user.id_user,
-      username: user.username,
-    }));
-  }
-
   async findById(id: number): Promise<User | null> {
     return this.findOne({ where: { id_user: id } });
   }
@@ -39,5 +26,18 @@ export class UserRepository extends Repository<User> {
   async softDeleteById(id: string): Promise<true> {
     await this.softDelete(id);
     return
+  }
+
+  async bringUsersCollection(
+    user_ids: number[],
+  ): Promise<MultipleUserCollectionResponseDTO> {
+    const users = await this.find({
+      where: { id_user: In(user_ids) },
+    });
+
+    return users.map((user) => ({
+      id: user.id_user,
+      username: user.username,
+    }));
   }
 }

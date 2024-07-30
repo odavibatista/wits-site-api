@@ -60,15 +60,11 @@ export class CourseService {
     | UserNotFoundException
     | CourseNotFoundException
   > {
-    const user = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) throw new UserNotFoundException();
 
-    const course = await this.courseRepository.findOne({
-      where: { id_course: course_id },
-    });
+    const course = await this.courseRepository.findById(course_id);
 
     if (!course) throw new CourseNotFoundException();
 
@@ -139,9 +135,7 @@ export class CourseService {
   ): Promise<
     EditCourseResponseDTO | CourseNotFoundException | UnprocessableDataException
   > {
-    const course = await this.courseRepository.findOne({
-      where: { id_course: id },
-    });
+    const course = await this.courseRepository.findById(id);
 
     if (!course) throw new CourseNotFoundException();
     
