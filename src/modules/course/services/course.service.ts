@@ -69,7 +69,11 @@ export class CourseService {
 
     if (!course) throw new CourseNotFoundException();
 
-    const userConcluded = await this.userCourseConcludedRepository.findConcludedCourse(user_id, course_id)
+    const userConcluded =
+      await this.userCourseConcludedRepository.findConcludedCourse(
+        user_id,
+        course_id,
+      );
 
     const activities = (
       await this.activitiesRepository.findByCourseId(course_id)
