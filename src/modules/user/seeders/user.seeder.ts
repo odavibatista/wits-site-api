@@ -5,15 +5,13 @@ import users from './user.sample';
 import { HashProvider } from '../providers/hash.provider';
 
 export default class UserSeeder implements Seeder {
-    public async hash(
-        source: any []
-    )   {
-        const hashProvider = new HashProvider();
-        
-        for (let i = 0; i < source.length; i++) {
-            source[i].password = await hashProvider.hash(source[i].password);
-        }
+  public async hash(source: any[]) {
+    const hashProvider = new HashProvider();
+
+    for (let i = 0; i < source.length; i++) {
+      source[i].password = await hashProvider.hash(source[i].password);
     }
+  }
 
   public async run(
     dataSource: DataSource,

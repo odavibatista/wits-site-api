@@ -34,9 +34,7 @@ export class UserScoreService {
   async bringIndividualScore(
     user_id: number,
   ): Promise<any | UserNotFoundException> {
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: user_id },
-    });
+    const userScore = await this.userScoreRepository.findByUserId(user_id);
 
     if (!userScore) throw new UserNotFoundException();
 
@@ -56,18 +54,10 @@ export class UserScoreService {
         'Pontuação inválida. Valor não pode ser negativo, decimal ou com mais de 5 dígitos.',
       );
 
-    const userScoreExists = await this.userRepository.findOne({
-      where: { id_user: user_id },
-    });
+    const userScoreExists = await this.userRepository.findById(user_id);
 
     if (!userScoreExists) throw new UserNotFoundException();
 
-    const userScore = await this.userScoreRepository.findOne({
-      where: { user_id: user_id },
-    });
-
-    userScore.total_score += score_to_add;
-
-    await this.userScoreRepository.save(userScore);
+    await this.userScoreRepository.addScore(user_id, score_to_add);
   }
 }

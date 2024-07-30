@@ -23,13 +23,13 @@ describe('UserService Test Suites', () => {
   let userClearingService: UserClearingService;
 
   beforeEach(() => {
-    jest.useFakeTimers({ doNotFake: ['nextTick'] })
-  })
+    jest.useFakeTimers({ doNotFake: ['nextTick'] });
+  });
 
   afterAll(() => {
-    jest.useRealTimers()
-  })
-  
+    jest.useRealTimers();
+  });
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -48,7 +48,7 @@ describe('UserService Test Suites', () => {
         HashProvider,
         UserRepository,
         UserClearingService,
-        UserScoreRepository
+        UserScoreRepository,
       ],
       exports: [JWTProvider, HashProvider, UserService, UserClearingService],
     }).compile();
@@ -279,7 +279,7 @@ describe('UserService Test Suites', () => {
     expect(async () => {
       await userService.getProfile(0);
     }).rejects.toThrow(UserNotFoundException);
-  })
+  });
 
   it('should bring the user`s profile given a valid id', async () => {
     await userService.getProfile(2).then(async (response) => {
@@ -288,163 +288,164 @@ describe('UserService Test Suites', () => {
       expect(response).toHaveProperty('user_score');
       expect(response).toHaveProperty('courses_completed');
       expect(response).toHaveProperty('member_since');
-    })
-  })
+    });
+  });
 
   it('should not update the user`s profile given an unexistant id', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(0, user);
     }).rejects.toThrow(UserNotFoundException);
-  })
+  });
 
   it('should not update the user`s profile given an email with less than 10 characters', async () => {
     const user = {
       email: 'z@abc.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an email with more than 50 characters', async () => {
     const user = {
-      email: 'zezinhodasilvacomumemailquesejamuitograndeaopontodelançarumaexceçaodaapietravetodoosistemakkkkkkkkk@abc.com',
+      email:
+        'zezinhodasilvacomumemailquesejamuitograndeaopontodelançarumaexceçaodaapietravetodoosistemakkkkkkkkk@abc.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an email without a domain', async () => {
     const user = {
       email: 'zezinhodasilva',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an email without a username', async () => {
     const user = {
       email: '@gmail.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an uncompleted domain', async () => {
     const user = {
       email: 'zezinho@com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an username with less than 5 characters', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zez',
-    }
-    
+    };
+
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an username with more than 15 characters', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zezzezzezzezzezzezzezzezzez',
-    }
-    
+    };
+
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an username with special characters', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zezinho@!',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
   it('should not update the user`s profile given an username with space characters', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zez in ho ',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UnprocessableDataException);
-  })
+  });
 
-  it('should not update the user`s profile given an unexisting user id', async()  =>  {
+  it('should not update the user`s profile given an unexisting user id', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(0, user);
     }).rejects.toThrow(UserNotFoundException);
-  })
+  });
 
-  it('should not update the user`s profile given an username that already exists', async()  =>  {
+  it('should not update the user`s profile given an username that already exists', async () => {
     const user = {
       email: 'zezinhodasilva@gmail.com',
       username: 'juliana',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(UsernameAlreadyRegisteredException);
-  })
+  });
 
-  it('should not update the user`s profile given an email that already exists', async()  =>  {
+  it('should not update the user`s profile given an email that already exists', async () => {
     const user = {
       email: 'julianaonebitcode@email.com',
       username: 'zezinho',
-    }
+    };
 
     expect(async () => {
       await userService.alterProfile(2, user);
     }).rejects.toThrow(EmailAlreadyRegisteredException);
-  })
+  });
 
   it('should update the user`s profile given the valid credentials', async () => {
     const user = {
       email: 'ozezinhodasilva@gmail.com',
       username: 'zezinho',
-    }
+    };
 
     await userService.alterProfile(2, user).then(async (response) => {
       expect(response).toHaveProperty('email');
       expect(response).toHaveProperty('username');
-    })
-  })
+    });
+  });
 
   it('should not login an user given the wrong username', async () => {
     const user: CreateUserDTO = {

@@ -15,13 +15,13 @@ describe('UserScoreService', () => {
   let userScoreService: UserScoreService;
 
   beforeEach(() => {
-    jest.useFakeTimers({ doNotFake: ['nextTick'] })
-  })
+    jest.useFakeTimers({ doNotFake: ['nextTick'] });
+  });
 
   afterAll(() => {
-    jest.useRealTimers()
-  })
-  
+    jest.useRealTimers();
+  });
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
