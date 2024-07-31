@@ -12,7 +12,6 @@ import {
 
 @Entity()
 class UserActivitiesAnswered {
-  
   /* Constructor for unit tests */
   constructor(user_id: number, activity_id: number) {
     this.user_id = user_id;
