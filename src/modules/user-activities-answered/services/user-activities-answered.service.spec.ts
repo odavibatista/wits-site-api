@@ -6,7 +6,7 @@ import { UserModule } from '../../user/user.module';
 import { User } from '../../user/entity/user.entity';
 import { UserScore } from '../../user-score/entity/user-score.entity';
 import { UserScoreService } from '../../user-score/services/user-score.service';
-import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
+import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
 import { UserRepository } from '../../user/repository/user.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
