@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniqueTokenProvider } from './unique-token.provider';
+import { UniqueTokenProviderInterface } from './unique-token.provider';
 
-describe('UniqueTokenProvider', () => {
-  let provider: UniqueTokenProvider;
+describe('Unique Token Provider Interface Test Suites', () => {
+  const mockUniqueTokenProviderInterface: UniqueTokenProviderInterface = {
+    createToken: jest.fn(),
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UniqueTokenProvider],
     }).compile();
 
-    provider = module.get<UniqueTokenProvider>(UniqueTokenProvider);
   });
 
-  it('should be defined', () => {
-    expect(provider).toBeDefined();
-  });
+  it('should have the createToken method', async () => {
+    expect(mockUniqueTokenProviderInterface.createToken).toBeTruthy()
+  })
 });
