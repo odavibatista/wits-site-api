@@ -1,18 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HashProvider } from './hash.provider';
+import { HashProviderInterface } from './hash.provider';
 
-describe('HashProvider', () => {
-  let provider: HashProvider;
+describe('Hash Provider Interface Test Suites', () => {
+
+  const mockHashProviderInterface: HashProviderInterface = {
+    hash: jest.fn(),
+    compare: jest.fn(),
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HashProvider],
     }).compile();
 
-    provider = module.get<HashProvider>(HashProvider);
   });
 
-  it('should be defined', () => {
-    expect(provider).toBeDefined();
-  });
+  it('should have the hash method', async () => {
+    expect(mockHashProviderInterface.hash).toBeTruthy()
+  })
+
+  it('should have the compare method', async () => {
+    expect(mockHashProviderInterface.compare).toBeTruthy()
+  })
 });
