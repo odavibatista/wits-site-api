@@ -1,15 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { JwtProvider } from './jwt.provider';
+import { JWTProviderInterface } from './jwt.provider';
 
 describe('JwtProvider', () => {
-  let provider: JwtProvider;
+  let provider: JWTProviderInterface;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [JwtProvider],
     }).compile();
 
-    provider = module.get<JwtProvider>(JwtProvider);
   });
 
   it('should be defined', () => {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HashProvider } from './hash.provider';
 
-describe('HashProvider', () => {
+describe('Hash Provider Test Suites', () => {
   let hashProvider: HashProvider;
 
   beforeEach(async () => {

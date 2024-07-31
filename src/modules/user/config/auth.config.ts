@@ -13,7 +13,7 @@ try {
   authConfig = authConfigSchema.parse({
     token: {
       secret: String(process.env.JWT_KEY),
-      expiresIn: '6h',
+      expiresIn: '30d',
     },
   });
 } catch (error) {
