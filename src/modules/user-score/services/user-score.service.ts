@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserScoreRepository } from '../repository/user-score-repository';
+import { UserScoreRepository } from '../repository/user-score.repository';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
 import { FindTopScoresResponseDTO } from '../../user/domain/requests/FindTopScores.request.dto';

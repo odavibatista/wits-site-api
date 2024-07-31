@@ -5,7 +5,7 @@ import { UserModule } from '../../user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../user/entity/user.entity';
 import { UserScore } from '../entity/user-score.entity';
-import { UserScoreRepository } from '../repository/user-score-repository';
+import { UserScoreRepository } from '../repository/user-score.repository';
 import { UserRepository } from '../../user/repository/user.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';

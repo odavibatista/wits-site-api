@@ -19,7 +19,7 @@ import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { CommonException } from '../../../shared/domain/errors/Common.exception';
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
-import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
+import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
 import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
