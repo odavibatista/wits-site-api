@@ -24,7 +24,7 @@ export class ActivityRepository extends Repository<Activity> {
     return this.count({ where: { course_id } });
   }
 
-  async softDeleteById(id: string): Promise<true> {
+  async softDeleteById(id: number): Promise<true> {
     await this.softDelete(id);
     return;
   }
@@ -38,6 +38,7 @@ export class ActivityRepository extends Repository<Activity> {
 
     return activities.map((activity) => ({
       id_activity: activity.id_activity,
+      course_id: activity.course_id,
       question: activity.question,
       option_1: activity.option_1,
       option_2: activity.option_2,

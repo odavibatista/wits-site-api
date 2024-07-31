@@ -13,7 +13,7 @@ import { User } from '../user/entity/user.entity';
 import { DatabaseModule } from 'src/database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from '../user/user.module';
-import { UserScoreRepository } from './repository/user-score-repository';
+import { UserScoreRepository } from './repository/user-score.repository';
 import { UserScore } from './entity/user-score.entity';
 import { UserRepository } from '../user/repository/user.repository';
 import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';

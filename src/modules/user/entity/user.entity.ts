@@ -17,9 +17,14 @@ export enum Role {
 
 @Entity()
 class Users {
-  
   /* Constructor for unit tests */
-  constructor(id_user: number, username: string, email: string, password: string, role: 'common' | 'admin') {
+  constructor(
+    id_user: number,
+    username: string,
+    email: string,
+    password: string,
+    role: 'common' | 'admin',
+  ) {
     this.id_user = id_user;
     this.username = username;
     this.email = email;
@@ -27,7 +32,7 @@ class Users {
     this.role = role;
     this.created_at = new Date();
     this.updated_at = new Date();
-    this.deleted_at = null
+    this.deleted_at = null;
   }
 
   @ManyToMany(() => Course, (course) => course.id_course)

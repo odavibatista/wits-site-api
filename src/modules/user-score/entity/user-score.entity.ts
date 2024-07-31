@@ -2,6 +2,7 @@ import { User } from '../../../modules/user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToOne,
   PrimaryColumn,
@@ -10,6 +11,15 @@ import {
 
 @Entity()
 class UserScores {
+  /* Constructor for unit tests */
+  constructor(user_id: number, total_score: number) {
+    this.user_id = user_id;
+    this.total_score = total_score;
+    this.deleted_at = null;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+  }
+
   @PrimaryColumn({
     unique: true,
   })
@@ -25,6 +35,9 @@ class UserScores {
     nullable: false,
   })
   created_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 
   @UpdateDateColumn({
     nullable: false,

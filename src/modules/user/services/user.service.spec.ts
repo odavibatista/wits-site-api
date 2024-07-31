@@ -16,7 +16,7 @@ import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRe
 import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
-import { UserScoreRepository } from '../../user-score/repository/user-score-repository';
+import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
 
 describe('UserService Test Suites', () => {
   let userService: UserService;

@@ -16,7 +16,7 @@ import { UserActivitiesAnsweredController } from './controller/user-activities-a
 import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
-import { UserScoreRepository } from '../user-score/repository/user-score-repository';
+import { UserScoreRepository } from '../user-score/repository/user-score.repository';
 import { UserScoreService } from '../user-score/services/user-score.service';
 import { CourseRepository } from '../course/repository/course.repository';
 import { UserService } from '../user/services/user.service';
