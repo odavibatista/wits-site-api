@@ -147,4 +147,54 @@ describe('Course Repository Test Suites', () => {
       },
     ]);
   });
+
+  it('should bring a collection of courses by their ids and ordered by the most recent', async () => {
+    const findSpy = jest
+      .spyOn(courseRepository, 'find')
+      .mockResolvedValue([course2, course]);
+
+    const courses = await courseRepository.bringCoursesCollection([1], {
+      created_at: 'DESC',
+    });
+
+    expect(courses).toEqual([
+      {
+        id_course: 2,
+        course_name: 'course2',
+        points_worth: 200,
+        created_at: course2.created_at,
+      },
+      {
+        id_course: 1,
+        course_name: 'course',
+        points_worth: 100,
+        created_at: course.created_at,
+      },
+    ]);
+  })
+
+    it('should bring a collection of courses by their ids and ordered by the least recent', async () => {
+        const findSpy = jest
+        .spyOn(courseRepository, 'find')
+        .mockResolvedValue([course, course2]);
+    
+        const courses = await courseRepository.bringCoursesCollection([1], {
+        created_at: 'ASC',
+        });
+    
+        expect(courses).toEqual([
+        {
+            id_course: 1,
+            course_name: 'course',
+            points_worth: 100,
+            created_at: course.created_at,
+        },
+        {
+            id_course: 2,
+            course_name: 'course2',
+            points_worth: 200,
+            created_at: course2.created_at,
+        },
+        ]);
+    });
 });
