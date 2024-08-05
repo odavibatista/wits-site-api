@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   Patch,
@@ -237,6 +238,47 @@ export class UserController {
       });
     } else {
       return res.status(201).json(result);
+    }
+  }
+
+  @Delete('delete-profile')
+  @ApiBearerAuth('user-token')
+  @ApiResponse({
+    status: new NotAuthenticatedException().getStatus(),
+    description: new NotAuthenticatedException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  @ApiResponse({
+    status: new UnauthorizedException().getStatus(),
+    description: new UnauthorizedException().message,
+    type: AllExceptionsFilterDTO,
+  })
+  @ApiResponse({
+    status: 204,
+    description: 'Usuário deletado com sucesso.',
+  })
+  async deleteUser(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<{} | AllExceptionsFilterDTO> {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(new NotAuthenticatedException().getStatus()).json({
+        message: new NotAuthenticatedException().message,
+        status: new NotAuthenticatedException().getStatus(),
+      });
+    }
+
+    const result = await this.userService.softDelete(user.id);
+
+    if (result instanceof HttpException) {
+      return res.status(result.getStatus()).json({
+        message: result.message,
+        status: result.getStatus(),
+      });
+    } else {
+      return res.status(204).json({});
     }
   }
 }
