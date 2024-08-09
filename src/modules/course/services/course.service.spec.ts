@@ -18,9 +18,14 @@ import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exc
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 import { UserRepository } from '../../user/repository/user.repository';
+import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('Course Service Automated Tests', () => {
   let courseService: CourseService;
+
+  beforeAll(async () => {
+    await TestHelper.instance.setupTestDB();
+  });
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
@@ -28,6 +33,7 @@ describe('Course Service Automated Tests', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    TestHelper.instance.teardownTestDB();
   });
 
   beforeEach(async () => {

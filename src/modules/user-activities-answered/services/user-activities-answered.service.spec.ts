@@ -17,9 +17,14 @@ import { UserActivityAnsweredRepository } from '../repository/user-activities-an
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { CourseRepository } from '../../course/repository/course.repository';
+import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('UserActivitiesAnsweredService', () => {
   let userActivitiesAnsweredService: UserActivitiesAnsweredService;
+
+  beforeAll(async () => {
+    await TestHelper.instance.setupTestDB();
+  });
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
@@ -27,6 +32,7 @@ describe('UserActivitiesAnsweredService', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    TestHelper.instance.teardownTestDB();
   });
 
   beforeEach(async () => {

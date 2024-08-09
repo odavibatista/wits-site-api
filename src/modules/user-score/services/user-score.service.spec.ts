@@ -10,9 +10,14 @@ import { UserRepository } from '../../user/repository/user.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
 import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('UserScoreService', () => {
   let userScoreService: UserScoreService;
+
+  beforeAll(async () => {
+    await TestHelper.instance.setupTestDB();
+  });
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
@@ -20,6 +25,7 @@ describe('UserScoreService', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    TestHelper.instance.teardownTestDB();
   });
 
   beforeEach(async () => {
