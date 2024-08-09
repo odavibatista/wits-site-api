@@ -15,9 +15,14 @@ import { CourseNotFoundException } from '../../course/domain/errors/CourseNotFou
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
 import { UserRepository } from '../../user/repository/user.repository';
+import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('Activity Service Tests Suite', () => {
   let activityService: ActivityService;
+
+  beforeAll(async () => {
+    await TestHelper.instance.setupTestDB();
+  });
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
@@ -25,6 +30,7 @@ describe('Activity Service Tests Suite', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    TestHelper.instance.teardownTestDB();
   });
 
   beforeEach(async () => {

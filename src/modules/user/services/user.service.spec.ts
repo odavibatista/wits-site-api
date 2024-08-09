@@ -17,10 +17,15 @@ import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlr
 import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
 import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
 import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
+import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('UserService Test Suites', () => {
   let userService: UserService;
   let userClearingService: UserClearingService;
+
+  beforeAll(async () => {
+    await TestHelper.instance.setupTestDB();
+  });
 
   beforeEach(() => {
     jest.useFakeTimers({ doNotFake: ['nextTick'] });
@@ -28,6 +33,7 @@ describe('UserService Test Suites', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    TestHelper.instance.teardownTestDB();
   });
 
   beforeEach(async () => {
