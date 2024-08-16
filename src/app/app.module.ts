@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DatabaseModule } from '../database/database.module';
-import { UserModule } from '../modules/user/user.module';
+import { UserModule } from '../modules/user/infra/modules/user.module';
 import { UserScoreModule } from '../modules/user-score/user-score.module';
 import { CourseModule } from '../modules/course/course.module';
 import { UserActivitiesAnsweredModule } from '../modules/user-activities-answered/user-activities-answered.module';

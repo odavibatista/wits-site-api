@@ -17,8 +17,8 @@ import {
   EditCourseRequestDTO,
   EditCourseResponseDTO,
 } from '../domain/requests/EditCourse.request.dto';
-import { UserRepository } from '../../user/repository/user.repository';
-import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
+import { UserRepository } from '../../user/repositories/user.repository';
+import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
 
 @Injectable()
 export class CourseService {

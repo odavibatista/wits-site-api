@@ -11,15 +11,15 @@ import { User } from '../user/entity/user.entity';
 import { Activity } from '../activity/entity/activity.entity';
 import { UserActivityAnsweredRepository } from './repository/user-activities-answered.repository';
 import { ActivityRepository } from '../activity/repository/activity.repository';
-import { UserRepository } from '../user/repository/user.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 import { UserActivitiesAnsweredController } from './controller/user-activities-answered.controller';
-import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
+import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
 import { UserScoreRepository } from '../user-score/repository/user-score.repository';
 import { UserScoreService } from '../user-score/services/user-score.service';
 import { CourseRepository } from '../course/repository/course.repository';
-import { UserService } from '../user/services/user.service';
+import { UserService } from '../user/infra/services/user.service';
 import { HashProvider } from '../user/providers/hash.provider';
 import { UserScore } from '../user-score/entity/user-score.entity';
 

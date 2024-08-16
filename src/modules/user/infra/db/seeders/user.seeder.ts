@@ -2,7 +2,7 @@ import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
 import { User } from '../entity/user.entity';
 import users from './user.sample';
-import { HashProvider } from '../providers/hash.provider';
+import { HashProvider } from '../../providers/hash.provider';
 
 export default class UserSeeder implements Seeder {
   public async hash(source: any[]) {

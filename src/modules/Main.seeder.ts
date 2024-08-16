@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager, runSeeder } from 'typeorm-extension';
 import CourseSeeder from './course/seeders/course.seeder';
 import ActivitySeeder from './activity/seeders/activity.seeder';
-import UserSeeder from './user/seeders/user.seeder';
+import UserSeeder from './user/infra/db/seeders/user.seeder';
 import UserScoreSeeder from './user-score/seeders/user-score.seeder';
 
 export class MainSeeder implements Seeder {

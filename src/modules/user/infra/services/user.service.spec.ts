@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserClearingService, UserService } from './user.service';
-import { DatabaseModule } from '../../../database/database.module';
+import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Course } from '../../course/entity/course.entity';
-import { Activity } from '../../activity/entity/activity.entity';
-import { UserCourseConcluded } from '../../user-courses-concluded/entity/user-courses-concluded.entity';
-import { UserActivityAnswered } from '../../user-activities-answered/entity/user-activities-answered.entity';
-import { UserScore } from '../../user-score/entity/user-score.entity';
+import { Course } from '../../../course/entity/course.entity';
+import { Activity } from '../../../activity/entity/activity.entity';
+import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
+import { UserActivityAnswered } from '../../../user-activities-answered/entity/user-activities-answered.entity';
+import { UserScore } from '../../../user-score/entity/user-score.entity';
 import { HashProvider } from '../providers/hash.provider';
 import { JWTProvider } from '../providers/jwt.provider';
-import { CreateUserDTO } from '../dto/user.dto';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { UserRepository } from '../repository/user.repository';
-import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRegistered.exception';
-import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
-import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
-import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
-import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { CreateUserDTO } from '../../dto/user.dto';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
+import { UserRepository } from '../db/repositories/user.repository';
+import { EmailAlreadyRegisteredException } from '../../domain/dtos/errors/EmailAlreadyRegistered.exception';
+import { UsernameAlreadyRegisteredException } from '../../domain/dtos/errors/UsernameAlreadyRegistered.exception';
+import { InvalidCredentialsException } from '../../domain/dtos/errors/InvalidCredentials.exception';
+import { UserNotFoundException } from '../../domain/dtos/errors/UserNotFound.exception';
+import { UserScoreRepository } from '../../../user-score/repository/user-score.repository';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('UserService Test Suites', () => {
   let userService: UserService;

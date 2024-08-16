@@ -1,32 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../repository/user.repository';
+import { UserRepository } from '../db/repositories/user.repository';
 import {
   CreateUserRequestDTO,
   CreateUserResponseDTO,
-} from '../domain/requests/CreateUser.request.dto';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRegistered.exception';
-import { emailValidate } from '../../../shared/utils/email.validator';
-import { passwordValidate } from '../../../shared/utils/password.validator';
+} from '../../domain/dtos/requests/CreateUser.request.dto';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
+import { EmailAlreadyRegisteredException } from '../../domain/dtos/errors/EmailAlreadyRegistered.exception';
+import { emailValidate } from '../../../../shared/utils/email.validator';
+import { passwordValidate } from '../../../../shared/utils/password.validator';
 import { JWTProvider } from '../providers/jwt.provider';
 import { HashProvider } from '../providers/hash.provider';
-import { nameValidate } from '../../../shared/utils/username.validator';
+import { nameValidate } from '../../../../shared/utils/username.validator';
 import {
   LoginUserBodyDTO,
   LoginUserResponseDTO,
-} from '../domain/requests/LoginUser.request.dto';
-import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
-import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
-import { CommonException } from '../../../shared/domain/errors/Common.exception';
-import { UsernameAlreadyRegisteredException } from '../domain/errors/UsernameAlreadyRegistered.exception';
-import { UserScoreRepository } from '../../user-score/repository/user-score.repository';
-import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
-import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
+} from '../../domain/dtos/requests/LoginUser.request.dto';
+import { UserNotFoundException } from '../../domain/dtos/errors/UserNotFound.exception';
+import { InvalidCredentialsException } from '../../domain/dtos/errors/InvalidCredentials.exception';
+import { CommonException } from '../../../../shared/domain/errors/Common.exception';
+import { UsernameAlreadyRegisteredException } from '../../domain/dtos/errors/UsernameAlreadyRegistered.exception';
+import { UserScoreRepository } from '../../../user-score/repository/user-score.repository';
+import { HomeDataResponseDTO } from '../../domain/dtos/requests/HomeData.request.dto';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { GetUserProfileResponseResponseDTO } from '../../domain/dtos/requests/GetUserProfile.request.dto';
 import {
   EditProfileRequestDTO,
   EditProfileResponseDTO,
-} from '../domain/requests/EditProfile.request.dto';
+} from '../../domain/dtos/requests/EditProfile.request.dto';
 
 @Injectable()
 export class UserService {

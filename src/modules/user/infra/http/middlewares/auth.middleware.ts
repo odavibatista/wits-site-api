@@ -1,9 +1,9 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import { JWTProvider } from '../providers/jwt.provider';
+import { JWTProvider } from '../../providers/jwt.provider';
 import { NextFunction, Request } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
-import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { BadTokenEception } from '../../../shared/domain/errors/BadToken.exception';
+import { NotAuthenticatedException } from '../../../../../shared/domain/errors/NotAuthenticated.exception';
+import { BadTokenEception } from '../../../../../shared/domain/errors/BadToken.exception';
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {

@@ -14,7 +14,7 @@ import { JWTProvider } from '../../user/providers/jwt.provider';
 import { CourseNotFoundException } from '../../course/domain/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
-import { UserRepository } from '../../user/repository/user.repository';
+import { UserRepository } from '../../user/repositories/user.repository';
 import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('Activity Service Tests Suite', () => {

@@ -14,10 +14,10 @@ import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,
 } from '../domain/requests/FindCourses.request.dto';
-import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
+import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
 import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { UserRepository } from '../../user/repository/user.repository';
+import { UserRepository } from '../../user/repositories/user.repository';
 import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('Course Service Automated Tests', () => {

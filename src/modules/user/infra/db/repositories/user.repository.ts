@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, FindOptionsOrder, In, Repository } from 'typeorm';
 import { User } from '../entity/user.entity';
-import { MultipleUserCollectionResponseDTO } from '../domain/requests/FindUserCollection.request.dto';
+import { MultipleUserCollectionResponseDTO } from '../../../domain/dtos/requests/FindUserCollection.request.dto';
+import { UserRepositoryInterface } from '../../../domain/dtos/repositories/user.repository';
 
 @Injectable()
-export class UserRepository extends Repository<User> {
+export class UserRepository extends Repository<User> implements UserRepositoryInterface {
   constructor(private dataSource: DataSource) {
     super(User, dataSource.createEntityManager());
   }
 
-  async findById(id: number): Promise<User | null> {
+  async findById(id: number) {
     return this.findOne({ where: { id_user: id } });
   }
 

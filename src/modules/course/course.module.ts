@@ -16,11 +16,11 @@ import { User } from '../user/entity/user.entity';
 import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
 import { CourseRepository } from './repository/course.repository';
 import { ActivityRepository } from '../activity/repository/activity.repository';
-import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
+import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
 import { UserCourseConcluded } from '../user-courses-concluded/entity/user-courses-concluded.entity';
 import { JWTProvider } from '../user/providers/jwt.provider';
 import { UserActivityAnsweredRepository } from '../user-activities-answered/repository/user-activities-answered.repository';
-import { UserRepository } from '../user/repository/user.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 
 @Module({
   imports: [

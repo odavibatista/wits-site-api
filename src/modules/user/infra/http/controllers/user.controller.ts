@@ -10,30 +10,30 @@ import {
   Res,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { EmailAlreadyRegisteredException } from '../domain/errors/EmailAlreadyRegistered.exception';
-import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
-import { CommonException } from '../../../shared/domain/errors/Common.exception';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+import { EmailAlreadyRegisteredException } from '../../../domain/dtos/errors/EmailAlreadyRegistered.exception';
+import { AllExceptionsFilterDTO } from '../../../../../shared/domain/dtos/errors/AllException.filter.dto';
+import { CommonException } from '../../../../../shared/domain/errors/Common.exception';
+import { UnprocessableDataException } from '../../../../../shared/domain/errors/UnprocessableData.exception';
 import {
   CreateUserRequestDTO,
-  CreateUserResponseDTO,
-} from '../domain/requests/CreateUser.request.dto';
+  CreateUserResponseDTO }
+  from '../../../domain/dtos/requests/CreateUser.request.dto';
 import { Request, Response } from 'express';
 import {
   LoginUserBodyDTO,
   LoginUserResponseDTO,
-} from '../domain/requests/LoginUser.request.dto';
-import { UserNotFoundException } from '../domain/errors/UserNotFound.exception';
-import { InvalidCredentialsException } from '../domain/errors/InvalidCredentials.exception';
-import { HomeDataResponseDTO } from '../domain/requests/HomeData.request.dto';
-import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { GetUserProfileResponseResponseDTO } from '../domain/requests/GetUserProfile.request.dto';
+} from '../../../domain/dtos/requests/LoginUser.request.dto';
+import { UserNotFoundException } from '../../../domain/dtos/errors/UserNotFound.exception';
+import { InvalidCredentialsException } from '../../../domain/dtos/errors/InvalidCredentials.exception';
+import { HomeDataResponseDTO } from '../../../domain/dtos/requests/HomeData.request.dto';
+import { NotAuthenticatedException } from '../../../../../shared/domain/errors/NotAuthenticated.exception';
+import { GetUserProfileResponseResponseDTO } from '../../../domain/dtos/requests/GetUserProfile.request.dto';
 import {
   EditProfileRequestDTO,
   EditProfileResponseDTO,
-} from '../domain/requests/EditProfile.request.dto';
+} from '../../../domain/dtos/requests/EditProfile.request.dto';
 
 @Controller('user')
 @ApiTags('Usuário')

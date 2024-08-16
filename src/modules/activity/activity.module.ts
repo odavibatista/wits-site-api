@@ -12,7 +12,7 @@ import { Course } from '../course/entity/course.entity';
 import { User } from '../user/entity/user.entity';
 import { ActivityRepository } from './repository/activity.repository';
 import { CourseRepository } from '../course/repository/course.repository';
-import { AuthenticationMiddleware } from '../user/middlewares/auth.middleware';
+import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 
 @Module({

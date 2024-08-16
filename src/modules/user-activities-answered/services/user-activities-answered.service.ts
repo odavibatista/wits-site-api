@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { UserActivityAnsweredRepository } from '../repository/user-activities-answered.repository';
-import { UserRepository } from '../../user/repository/user.repository';
-import { UserNotFoundException } from '../../user/domain/errors/UserNotFound.exception';
+import { UserRepository } from '../../user/repositories/user.repository';
+import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
 import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
 import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
 import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
