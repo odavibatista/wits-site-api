@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { CourseRepository } from '../repositories/course.repository';
+import { CourseRepository } from '../db/repositories/course.repository';
 import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,
 } from '../../domain/dtos/requests/FindCourses.request.dto';
-import { ActivityRepository } from '../../../activity/repository/activity.repository';
+import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { CourseNotFoundException } from '../../domain/dtos/errors/CourseNotFound.exception';
 import {
   CreateCourseRequestDTO,
@@ -17,7 +17,7 @@ import {
   EditCourseRequestDTO,
   EditCourseResponseDTO,
 } from '../../domain/dtos/requests/EditCourse.request.dto';
-import { UserRepository } from '../../user/repositories/user.repository';
+import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
 
 @Injectable()

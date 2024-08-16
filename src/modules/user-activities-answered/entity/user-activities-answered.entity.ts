@@ -1,4 +1,4 @@
-import { Activity } from '../../../modules/activity/entity/activity.entity';
+import { Activity } from '../../activity/infra/db/entity/activity.entity';
 import { User } from '../../../modules/user/entity/user.entity';
 import {
   CreateDateColumn,

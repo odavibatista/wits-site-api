@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, FindOptionsOrder, In, Repository } from 'typeorm';
 import { Activity } from '../entity/activity.entity';
-import { FindActivitiesCollectionResponseDTO } from '../domain/requests/FindActivitiesCollection.request.dto';
+import { FindActivitiesCollectionResponseDTO } from '../../../domain/dtos/requests/FindActivitiesCollection.request.dto';
 
 @Injectable()
 export class ActivityRepository extends Repository<Activity> {

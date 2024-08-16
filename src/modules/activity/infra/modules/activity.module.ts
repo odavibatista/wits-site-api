@@ -4,16 +4,16 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { ActivityService } from './services/activity.service';
-import { ActivityController } from './controller/activity.controller';
-import { DatabaseModule } from '../../database/database.module';
+import { ActivityService } from '../services/activity.service';
+import { ActivityController } from '../http/controllers/activity.controller';
+import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Course } from '../course/infra/db/entity/course.entity';
-import { User } from '../user/entity/user.entity';
-import { ActivityRepository } from './repository/activity.repository';
-import { CourseRepository } from '../course/repositories/course.repository';
-import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
-import { JWTProvider } from '../user/providers/jwt.provider';
+import { Course } from '../../../course/infra/db/entity/course.entity';
+import { User } from '../../../user/infra/db/entity/user.entity';
+import { ActivityRepository } from '../db/repositories/activity.repository';
+import { CourseRepository } from '../../../course/infra/db/repositories/course.repository';
+import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';
+import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([User, Course])],

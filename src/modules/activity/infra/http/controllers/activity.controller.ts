@@ -10,24 +10,24 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { ActivityService } from '../services/activity.service';
+import { ActivityService } from '../../services/activity.service';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   CreateActivityRequestDTO,
   CreateActivityResponseDTO,
-} from '../domain/requests/CreateActivity.request.dto';
-import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { CourseNotFoundException } from '../../course/domain/dtos/errors/CourseNotFound.exception';
-import { CommonException } from '../../../shared/domain/errors/Common.exception';
+} from '../../../domain/dtos/requests/CreateActivity.request.dto';
+import { NotAuthenticatedException } from '../../../../../shared/domain/errors/NotAuthenticated.exception';
+import { CourseNotFoundException } from '../../../../course/domain/dtos/errors/CourseNotFound.exception';
+import { CommonException } from '../../../../../shared/domain/errors/Common.exception';
 import { Request, Response } from 'express';
-import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
-import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
+import { AllExceptionsFilterDTO } from '../../../../../shared/domain/dtos/errors/AllException.filter.dto';
+import { NoPermisionException } from '../../../../../shared/domain/errors/NoPermission.exception';
 import {
   EditActivityRequestDTO,
   EditActivityResponseDTO,
-} from '../domain/requests/EditActivity.request.dto';
-import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
-import { GetActivityResponseDTO } from '../domain/requests/GetActivity.request.dto';
+} from '../../../domain/dtos/requests/EditActivity.request.dto';
+import { ActivityNotFoundException } from '../../../domain/dtos/errors/ActivityNotFound.exception';
+import { GetActivityResponseDTO } from '../../../domain/dtos/requests/GetActivity.request.dto';
 
 @Controller('activity')
 @ApiTags('Atividades do Curso')

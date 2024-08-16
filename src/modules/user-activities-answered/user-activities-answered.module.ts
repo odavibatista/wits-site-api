@@ -8,9 +8,9 @@ import { UserActivitiesAnsweredService } from './services/user-activities-answer
 import { DatabaseModule } from '../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/entity/user.entity';
-import { Activity } from '../activity/entity/activity.entity';
+import { Activity } from '../activity/infra/db/entity/activity.entity';
 import { UserActivityAnsweredRepository } from './repository/user-activities-answered.repository';
-import { ActivityRepository } from '../activity/repository/activity.repository';
+import { ActivityRepository } from '../activity/repositories/activity.repository';
 import { UserRepository } from '../user/repositories/user.repository';
 import { UserActivitiesAnsweredController } from './controller/user-activities-answered.controller';
 import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';

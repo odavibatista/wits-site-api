@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DataSource } from 'typeorm';
 import { ActivityRepository } from './activity.repository';
-import { Activity } from '../entity/activity.entity';
+import { Activity } from '../infra/db/entity/activity.entity';
 
 describe('Activity Repository Test Suites', () => {
     let activityRepository: ActivityRepository;

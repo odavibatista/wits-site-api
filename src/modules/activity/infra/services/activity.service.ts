@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { ActivityRepository } from '../repository/activity.repository';
-import { Activity } from '../entity/activity.entity';
-import { CourseNotFoundException } from '../../course/domain/dtos/errors/CourseNotFound.exception';
+import { ActivityRepository } from '../repositories/activity.repository';
+import { Activity } from '../db/entity/activity.entity';
+import { CourseNotFoundException } from '../../../course/domain/dtos/errors/CourseNotFound.exception';
 import { CourseRepository } from '../../course/repositories/course.repository';
 import {
   CreateActivityRequestDTO,
   CreateActivityResponseDTO,
-} from '../domain/requests/CreateActivity.request.dto';
+} from '../../domain/dtos/requests/CreateActivity.request.dto';
 import {
   EditActivityRequestDTO,
   EditActivityResponseDTO,
-} from '../domain/requests/EditActivity.request.dto';
-import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+} from '../../domain/dtos/requests/EditActivity.request.dto';
+import { ActivityNotFoundException } from '../../domain/dtos/errors/ActivityNotFound.exception';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
 
 @Injectable()
 export class ActivityService {

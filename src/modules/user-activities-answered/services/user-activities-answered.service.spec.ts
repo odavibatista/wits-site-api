@@ -14,7 +14,7 @@ import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exc
 import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
 import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
 import { UserActivityAnsweredRepository } from '../repository/user-activities-answered.repository';
-import { ActivityRepository } from '../../activity/repository/activity.repository';
+import { ActivityRepository } from '../../activity/repositories/activity.repository';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { CourseRepository } from '../../course/repositories/course.repository';
 import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';

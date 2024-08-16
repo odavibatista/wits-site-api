@@ -1,21 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ActivityService } from './activity.service';
-import { DatabaseModule } from '../../../database/database.module';
+import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Activity } from '../entity/activity.entity';
-import { UserCourseConcluded } from '../../user-courses-concluded/entity/user-courses-concluded.entity';
+import { Activity } from '../db/entity/activity.entity';
+import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
 import { User } from '../../user/entity/user.entity';
-import { CourseService } from '../../course/infra/services/course.service';
+import { CourseService } from '../../../course/infra/services/course.service';
 import { CourseRepository } from '../../course/repositories/course.repository';
-import { ActivityRepository } from '../repository/activity.repository';
-import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { UserActivityAnsweredRepository } from '../../user-activities-answered/repository/user-activities-answered.repository';
+import { ActivityRepository } from '../repositories/activity.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
-import { CourseNotFoundException } from '../../course/domain/dtos/errors/CourseNotFound.exception';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
+import { CourseNotFoundException } from '../../../course/domain/dtos/errors/CourseNotFound.exception';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
+import { ActivityNotFoundException } from '../../domain/dtos/errors/ActivityNotFound.exception';
 import { UserRepository } from '../../user/repositories/user.repository';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('Activity Service Tests Suite', () => {
   let activityService: ActivityService;
