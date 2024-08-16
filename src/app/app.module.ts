@@ -7,13 +7,13 @@ import { UserActivitiesAnsweredModule } from '../modules/user-activities-answere
 import { UserCoursesConcludedModule } from '../modules/user-courses-concluded/infra/modules/user-courses-concluded.module';
 import { ActivityModule } from '../modules/activity/infra/modules/activity.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { RedisOptions } from '../shared/config/redis.config';
 
 @Module({
   imports: [
-    CacheModule.register({
-      isGlobal: true,
-      ttl: 60 * 10000,
-    }),
+    ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.registerAsync(RedisOptions),
     DatabaseModule,
     UserModule,
     UserScoreModule,
