@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../db/repositories/user.repository';
 import {
   CreateUserRequestDTO,
@@ -27,10 +27,13 @@ import {
   EditProfileRequestDTO,
   EditProfileResponseDTO,
 } from '../../domain/dtos/requests/EditProfile.request.dto';
+import { Cache } from '@nestjs/cache-manager';
 
 @Injectable()
 export class UserService {
   constructor(
+    @Inject('CACHE_MANAGER')
+    private cacheManager: Cache,
     private readonly userRepository: UserRepository,
     private readonly userScoreRepository: UserScoreRepository,
     private readonly userCoursesConcludedRepository: UserCourseConcludedRepository,
@@ -154,11 +157,24 @@ export class UserService {
   async homeData(
     user_id: number,
   ): Promise<HomeDataResponseDTO | UserNotFoundException> {
+    const cachedData = await this.cacheManager.get(`homedata:${user_id}`);
+    
+    if (cachedData) return cachedData
+
     const user = await this.userRepository.findById(user_id);
 
     if (!user) throw new UserNotFoundException();
 
     const userScore = await this.userScoreRepository.findByUserId(user_id);
+
+    await this.cacheManager.set(`homedata:${user_id}`, {
+      user: {
+        id: user.id_user,
+        username: user.username,
+        score: userScore.total_score,
+        role: user.role,
+      }
+    })
 
     return {
       user: {
@@ -174,6 +190,10 @@ export class UserService {
   async getProfile(
     id: number,
   ): Promise<GetUserProfileResponseResponseDTO | UserNotFoundException> {
+    const cachedData = await this.cacheManager.get(`profile:${id}`);
+
+    if (cachedData) return cachedData;
+
     const user = await this.userRepository.findById(id);
 
     if (!user) {
@@ -184,6 +204,14 @@ export class UserService {
 
     const userConcludedCourses =
       await this.userCoursesConcludedRepository.countUserConcludedCourses(id);
+
+    await this.cacheManager.set(`profile:${id}`, {
+      username: user.username,
+      email: user.email,
+      user_score: userScore.total_score,
+      courses_completed: userConcludedCourses,
+      member_since: String(user.created_at),
+    })
 
     return {
       username: user.username,
