@@ -21,7 +21,7 @@ import { CommonException } from '../../../../shared/domain/errors/Common.excepti
 import { UsernameAlreadyRegisteredException } from '../../domain/dtos/errors/UsernameAlreadyRegistered.exception';
 import { UserScoreRepository } from '../../../user-score/repositories/user-score.repository';
 import { HomeDataResponseDTO } from '../../domain/dtos/requests/HomeData.request.dto';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
 import { GetUserProfileResponseResponseDTO } from '../../domain/dtos/requests/GetUserProfile.request.dto';
 import {
   EditProfileRequestDTO,

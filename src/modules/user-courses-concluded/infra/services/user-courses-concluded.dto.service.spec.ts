@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserCoursesConcludedDtoService } from './user-courses-concluded.dto.service';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('UserCoursesConcludedDtoService', () => {
   let service: UserCoursesConcludedDtoService;

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { ActivityRepository } from '../../activity/repositories/activity.repository';
-import { UserActivityAnsweredRepository } from '../repositories/user-activities-answered.repository';
-import { UserRepository } from '../../user/repositories/user.repository';
+import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
+import { UserActivityAnsweredRepository } from '../db/repositories/user-activities-answered.repository';
+import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
 import { WrongAnswerException } from '../../domain/dtos/errors/WrongAnswer.exception';
 import { ActivityNotFoundException } from '../../domain/dtos/errors/ActivityNotFound.exception';
 import { ActivityAlreadyAnsweredException } from '../../domain/dtos/errors/ActivityAlreadyAnswered.exception';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/infra/db/repositories/user-courses-concluded.repository';
 import { UserScoreService } from '../../../user-score/infra/services/user-score.service';
-import { CourseRepository } from '../../course/repositories/course.repository';
+import { CourseRepository } from '../../../course/infra/db/repositories/course.repository';
 
 @Injectable()
 export class UserActivitiesAnsweredService {

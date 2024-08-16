@@ -1,5 +1,5 @@
-import { Course } from '../../course/infra/db/entity/course.entity';
-import { User } from '../../../modules/user/entity/user.entity';
+import { Course } from '../../../../course/infra/db/entity/course.entity';
+import { User } from '../../../../user/infra/db/entity/user.entity';
 import {
   CreateDateColumn,
   DeleteDateColumn,

@@ -6,7 +6,7 @@ import { User } from '../../../user/infra/db/entity/user.entity';
 import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
 import { Activity } from '../../../activity/infra/db/entity/activity.entity';
 import { CourseRepository } from '../db/repositories/course.repository';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
 import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
 import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repositories/user-activities-answered.repository';

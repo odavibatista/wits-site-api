@@ -13,7 +13,7 @@ import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Activity } from '../../../activity/infra/db/entity/activity.entity';
 import { User } from '../../../user/infra/db/entity/user.entity';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
 import { CourseRepository } from '../db/repositories/course.repository';
 import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';

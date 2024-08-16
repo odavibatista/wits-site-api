@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { UserCourseConcluded } from '../entity/user-courses-concluded.entity';
+import { UserCoursesConcludedRepositoryInterface } from '../../../domain/dtos/repositories/user-courses-concluded.repository';
 
 @Injectable()
-export class UserCourseConcludedRepository extends Repository<UserCourseConcluded> {
+export class UserCourseConcludedRepository extends Repository<UserCourseConcluded> implements UserCoursesConcludedRepositoryInterface {
   constructor(private dataSource: DataSource) {
     super(UserCourseConcluded, dataSource.createEntityManager());
   }
