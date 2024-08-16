@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserClearingService, UserService } from './user.service';
 import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Course } from '../../../course/entity/course.entity';
+import { Course } from '../../../course/infra/db/entity/course.entity';
 import { Activity } from '../../../activity/entity/activity.entity';
 import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
 import { UserActivityAnswered } from '../../../user-activities-answered/entity/user-activities-answered.entity';

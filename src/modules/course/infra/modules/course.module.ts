@@ -7,20 +7,20 @@ import {
 import {
   ConjunctCoursesController,
   IndividualCoursesController,
-} from './controller/course.controller';
-import { CourseService } from './services/course.service';
-import { DatabaseModule } from '../../database/database.module';
+} from '../http/controllers/course.controller';
+import { CourseService } from '../services/course.service';
+import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Activity } from '../activity/entity/activity.entity';
-import { User } from '../user/entity/user.entity';
-import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
-import { CourseRepository } from './repository/course.repository';
-import { ActivityRepository } from '../activity/repository/activity.repository';
-import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
-import { UserCourseConcluded } from '../user-courses-concluded/entity/user-courses-concluded.entity';
-import { JWTProvider } from '../user/providers/jwt.provider';
-import { UserActivityAnsweredRepository } from '../user-activities-answered/repository/user-activities-answered.repository';
-import { UserRepository } from '../user/repositories/user.repository';
+import { Activity } from '../../../activity/entity/activity.entity';
+import { User } from '../../../user/infra/db/entity/user.entity';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { CourseRepository } from '../db/repositories/course.repository';
+import { ActivityRepository } from '../../../activity/repository/activity.repository';
+import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';
+import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
+import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
+import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 
 @Module({
   imports: [

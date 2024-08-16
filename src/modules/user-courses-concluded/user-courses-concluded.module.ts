@@ -3,7 +3,7 @@ import { UserCoursesConcludedDtoService } from './services/user-courses-conclude
 import { DatabaseModule } from '../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/entity/user.entity';
-import { Course } from '../course/entity/course.entity';
+import { Course } from '../course/infra/db/entity/course.entity';
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([User, Course])],

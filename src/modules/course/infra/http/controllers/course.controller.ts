@@ -11,28 +11,28 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { CourseService } from '../services/course.service';
+import { CourseService } from '../../services/course.service';
 import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,
-} from '../domain/requests/FindCourses.request.dto';
+} from '../../../domain/dtos/requests/FindCourses.request.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
-import { CommonException } from '../../../shared/domain/errors/Common.exception';
+import { NotAuthenticatedException } from '../../../../../shared/domain/errors/NotAuthenticated.exception';
+import { AllExceptionsFilterDTO } from '../../../../../shared/domain/dtos/errors/AllException.filter.dto';
+import { CommonException } from '../../../../../shared/domain/errors/Common.exception';
 import { Request, Response } from 'express';
-import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
-import { PaginationDto } from '../../../shared/domain/dtos/providers/Pagination.dto';
+import { CourseNotFoundException } from '../../../domain/dtos/errors/CourseNotFound.exception';
+import { PaginationDto } from '../../../../../shared/domain/dtos/providers/Pagination.dto';
 import {
   CreateCourseRequestDTO,
   CreateCourseResponseDTO,
-} from '../domain/requests/CreateCourse.request.dto';
-import { NoPermisionException } from '../../../shared/domain/errors/NoPermission.exception';
+} from '../../../domain/dtos/requests/CreateCourse.request.dto';
+import { NoPermisionException } from '../../../../../shared/domain/errors/NoPermission.exception';
 import {
   EditCourseRequestDTO,
   EditCourseResponseDTO,
-} from '../domain/requests/EditCourse.request.dto';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+} from '../../../domain/dtos/requests/EditCourse.request.dto';
+import { UnprocessableDataException } from '../../../../../shared/domain/errors/UnprocessableData.exception';
 
 @Controller('courses')
 @ApiTags('Cursos')

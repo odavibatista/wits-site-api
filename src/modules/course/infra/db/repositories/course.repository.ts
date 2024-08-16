@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, FindOptionsOrder, In, Repository } from 'typeorm';
 import { Course } from '../entity/course.entity';
-import { FindMultipleCoursesResponseDTO } from '../domain/requests/FindMultipleCourses.request.dto';
+import { FindMultipleCoursesResponseDTO } from '../../../domain/dtos/requests/FindMultipleCourses.request.dto';
+import { CourseRepositoryInterface } from '../../../domain/dtos/repositories/course.repository';
 
 @Injectable()
-export class CourseRepository extends Repository<Course> {
+export class CourseRepository extends Repository<Course> implements CourseRepositoryInterface {
   constructor(private dataSource: DataSource) {
     super(Course, dataSource.createEntityManager());
   }

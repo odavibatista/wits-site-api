@@ -8,7 +8,7 @@ import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exc
 import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { UserScoreService } from '../../user-score/services/user-score.service';
-import { CourseRepository } from '../../course/repository/course.repository';
+import { CourseRepository } from '../../course/repositories/course.repository';
 
 @Injectable()
 export class UserActivitiesAnsweredService {

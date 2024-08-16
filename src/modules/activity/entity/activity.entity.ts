@@ -1,4 +1,4 @@
-import { Course } from '../../../modules/course/entity/course.entity';
+import { Course } from '../../course/infra/db/entity/course.entity';
 import { User } from '../../../modules/user/entity/user.entity';
 import {
   Column,

@@ -18,7 +18,7 @@ import { JWTProvider } from '../user/providers/jwt.provider';
 import { UserCourseConcludedRepository } from '../user-courses-concluded/repository/user-courses-concluded.repository';
 import { UserScoreRepository } from '../user-score/repository/user-score.repository';
 import { UserScoreService } from '../user-score/services/user-score.service';
-import { CourseRepository } from '../course/repository/course.repository';
+import { CourseRepository } from '../course/repositories/course.repository';
 import { UserService } from '../user/infra/services/user.service';
 import { HashProvider } from '../user/providers/hash.provider';
 import { UserScore } from '../user-score/entity/user-score.entity';

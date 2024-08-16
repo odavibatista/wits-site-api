@@ -17,7 +17,7 @@ import {
   CreateActivityResponseDTO,
 } from '../domain/requests/CreateActivity.request.dto';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { CourseNotFoundException } from '../../course/domain/errors/CourseNotFound.exception';
+import { CourseNotFoundException } from '../../course/domain/dtos/errors/CourseNotFound.exception';
 import { CommonException } from '../../../shared/domain/errors/Common.exception';
 import { Request, Response } from 'express';
 import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';

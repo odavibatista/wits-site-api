@@ -1,24 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CourseService } from './course.service';
-import { DatabaseModule } from '../../../database/database.module';
+import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../user/entity/user.entity';
-import { UserCourseConcluded } from '../../user-courses-concluded/entity/user-courses-concluded.entity';
-import { Activity } from '../../activity/entity/activity.entity';
-import { CourseRepository } from '../repository/course.repository';
-import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { ActivityRepository } from '../../activity/repository/activity.repository';
+import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
+import { Activity } from '../../../activity/entity/activity.entity';
+import { CourseRepository } from '../repositories/course.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { ActivityRepository } from '../../../activity/repository/activity.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
-import { UserActivityAnsweredRepository } from '../../user-activities-answered/repository/user-activities-answered.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
 import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,
-} from '../domain/requests/FindCourses.request.dto';
-import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
-import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+} from '../../domain/dtos/requests/FindCourses.request.dto';
+import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
+import { CourseNotFoundException } from '../../domain/dtos/errors/CourseNotFound.exception';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
 import { UserRepository } from '../../user/repositories/user.repository';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('Course Service Automated Tests', () => {
   let courseService: CourseService;

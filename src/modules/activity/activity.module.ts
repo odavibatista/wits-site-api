@@ -8,10 +8,10 @@ import { ActivityService } from './services/activity.service';
 import { ActivityController } from './controller/activity.controller';
 import { DatabaseModule } from '../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Course } from '../course/entity/course.entity';
+import { Course } from '../course/infra/db/entity/course.entity';
 import { User } from '../user/entity/user.entity';
 import { ActivityRepository } from './repository/activity.repository';
-import { CourseRepository } from '../course/repository/course.repository';
+import { CourseRepository } from '../course/repositories/course.repository';
 import { AuthenticationMiddleware } from '../user/infra/http/middlewares/auth.middleware';
 import { JWTProvider } from '../user/providers/jwt.provider';
 

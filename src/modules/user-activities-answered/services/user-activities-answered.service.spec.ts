@@ -16,7 +16,7 @@ import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
 import { UserActivityAnsweredRepository } from '../repository/user-activities-answered.repository';
 import { ActivityRepository } from '../../activity/repository/activity.repository';
 import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { CourseRepository } from '../../course/repository/course.repository';
+import { CourseRepository } from '../../course/repositories/course.repository';
 import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
 
 describe('UserActivitiesAnsweredService', () => {

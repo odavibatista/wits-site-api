@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { CourseRepository } from '../repository/course.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { CourseRepository } from '../repositories/course.repository';
 import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,
-} from '../domain/requests/FindCourses.request.dto';
-import { ActivityRepository } from '../../activity/repository/activity.repository';
-import { CourseNotFoundException } from '../domain/errors/CourseNotFound.exception';
+} from '../../domain/dtos/requests/FindCourses.request.dto';
+import { ActivityRepository } from '../../../activity/repository/activity.repository';
+import { CourseNotFoundException } from '../../domain/dtos/errors/CourseNotFound.exception';
 import {
   CreateCourseRequestDTO,
   CreateCourseResponseDTO,
-} from '../domain/requests/CreateCourse.request.dto';
-import { nameValidate } from '../../../shared/utils/username.validator';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
+} from '../../domain/dtos/requests/CreateCourse.request.dto';
+import { nameValidate } from '../../../../shared/utils/username.validator';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
 import {
   EditCourseRequestDTO,
   EditCourseResponseDTO,
-} from '../domain/requests/EditCourse.request.dto';
+} from '../../domain/dtos/requests/EditCourse.request.dto';
 import { UserRepository } from '../../user/repositories/user.repository';
-import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
+import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
 
 @Injectable()
 export class CourseService {
