@@ -24,6 +24,9 @@ const appConfigurationsSchema = z.object({
     .enum(['development', 'production', 'test', 'local'])
     .default('development'),
   SSL: z.boolean().default(false),
+
+  REDIS_HOST: z.string().min(1),
+  REDIS_PORT: z.number(),
 });
 
 let appConfigurations: z.infer<typeof appConfigurationsSchema> = {};
@@ -53,6 +56,8 @@ try {
     JWT_KEY: process.env.JWT_KEY,
     API_PORT: parseInt(process.env.API_PORT),
     SSL: process.env.NODE_ENV === 'production' ? true : false,
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: parseInt(process.env.REDIS_PORT),
   });
 } catch (error) {
   if (error instanceof ZodError) {

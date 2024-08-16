@@ -6,9 +6,14 @@ import { CourseModule } from '../modules/course/infra/modules/course.module';
 import { UserActivitiesAnsweredModule } from '../modules/user-activities-answered/infra/modules/user-activities-answered.module';
 import { UserCoursesConcludedModule } from '../modules/user-courses-concluded/infra/modules/user-courses-concluded.module';
 import { ActivityModule } from '../modules/activity/infra/modules/activity.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { RedisOptions } from '../shared/config/redis.config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.registerAsync(RedisOptions),
     DatabaseModule,
     UserModule,
     UserScoreModule,
