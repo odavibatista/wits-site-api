@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ActivityRepository } from '../repositories/activity.repository';
+import { ActivityRepository } from '../db/repositories/activity.repository';
 import { Activity } from '../db/entity/activity.entity';
 import { CourseNotFoundException } from '../../../course/domain/dtos/errors/CourseNotFound.exception';
-import { CourseRepository } from '../../course/repositories/course.repository';
+import { CourseRepository } from '../../../course/infra/db/repositories/course.repository';
 import {
   CreateActivityRequestDTO,
   CreateActivityResponseDTO,

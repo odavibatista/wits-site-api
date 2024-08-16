@@ -1,6 +1,6 @@
 import { Seeder, SeederFactoryManager } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
-import { Activity } from '../infra/db/entity/activity.entity';
+import { Activity } from '../entity/activity.entity';
 import {
   course_1_activities,
   course_2_activities,

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { sign, JwtPayload, verify } from 'jsonwebtoken';
-import { authConfig } from '../config/auth.config';
-import { JWTProviderInterface } from '../domain/providers/jwt.provider';
-import { JWTProviderDTO, JWTValidateDTO } from '../dto/JWTProvider.dto';
+import { authConfig } from '../../config/auth.config';
+import { JWTProviderInterface } from '../../domain/providers/jwt.provider';
+import { JWTProviderDTO, JWTValidateDTO } from '../../dto/JWTProvider.dto';
 
 const { expiresIn: configExpiresIn, secret: configSecret } = authConfig.token;
 

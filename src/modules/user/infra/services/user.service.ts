@@ -19,9 +19,9 @@ import { UserNotFoundException } from '../../domain/dtos/errors/UserNotFound.exc
 import { InvalidCredentialsException } from '../../domain/dtos/errors/InvalidCredentials.exception';
 import { CommonException } from '../../../../shared/domain/errors/Common.exception';
 import { UsernameAlreadyRegisteredException } from '../../domain/dtos/errors/UsernameAlreadyRegistered.exception';
-import { UserScoreRepository } from '../../../user-score/repositories/user-score.repository';
+import { UserScoreRepository } from '../../../user-score/infra/db/repositories/user-score.repository';
 import { HomeDataResponseDTO } from '../../domain/dtos/requests/HomeData.request.dto';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/infra/db/repositories/user-courses-concluded.repository';
 import { GetUserProfileResponseResponseDTO } from '../../domain/dtos/requests/GetUserProfile.request.dto';
 import {
   EditProfileRequestDTO,

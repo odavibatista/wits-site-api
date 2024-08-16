@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcryptjs';
-import { HashProviderInterface } from '../domain/providers/hash.provider';
+import { HashProviderInterface } from '../../domain/providers/hash.provider';
 
 @Injectable()
 export class HashProvider implements HashProviderInterface {

@@ -1,5 +1,5 @@
-import { Activity } from '../../../modules/activity/entity/activity.entity';
-import { Course } from '../../../modules/course/entity/course.entity';
+import { Activity } from '../../../../activity/infra/db/entity/activity.entity';
+import { Course } from '../../../../course/infra/db/entity/course.entity';
 import {
   Column,
   CreateDateColumn,

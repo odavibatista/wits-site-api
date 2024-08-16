@@ -13,13 +13,13 @@ import { DatabaseModule } from '../../../../database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Activity } from '../../../activity/infra/db/entity/activity.entity';
 import { User } from '../../../user/infra/db/entity/user.entity';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/infra/db/repositories/user-courses-concluded.repository';
 import { CourseRepository } from '../db/repositories/course.repository';
 import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';
-import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
+import { UserCourseConcluded } from '../../../user-courses-concluded/infra/db/entity/user-courses-concluded.entity';
 import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
-import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repositories/user-activities-answered.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/infra/db/repositories/user-activities-answered.repository';
 import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 
 @Module({

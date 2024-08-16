@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { UserScoreRepository } from '../repositories/user-score.repository';
+import { UserScoreRepository } from '../db/repositories/user-score.repository';
 import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
 import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
 import { FindTopScoresResponseDTO } from '../../../user/domain/dtos/requests/FindTopScores.request.dto';
-import { UserRepository } from '../../user/repositories/user.repository';
+import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 
 @Injectable()
 export class UserScoreService {

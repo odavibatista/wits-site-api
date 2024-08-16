@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repositories/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/infra/db/repositories/user-courses-concluded.repository';
 import { CourseRepository } from '../db/repositories/course.repository';
 import {
   FindCoursesResponseDTO,
