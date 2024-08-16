@@ -9,7 +9,7 @@ import { CourseRepository } from '../db/repositories/course.repository';
 import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
-import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repositories/user-activities-answered.repository';
 import {
   FindCoursesResponseDTO,
   FindIndividualCourseResponseDTO,

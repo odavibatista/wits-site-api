@@ -9,7 +9,7 @@ import { CourseService } from '../../../course/infra/services/course.service';
 import { CourseRepository } from '../../course/repositories/course.repository';
 import { ActivityRepository } from '../repositories/activity.repository';
 import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
-import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repositories/user-activities-answered.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
 import { CourseNotFoundException } from '../../../course/domain/dtos/errors/CourseNotFound.exception';
 import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';

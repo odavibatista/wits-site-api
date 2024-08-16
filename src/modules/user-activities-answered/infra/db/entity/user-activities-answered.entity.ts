@@ -1,5 +1,5 @@
-import { Activity } from '../../activity/infra/db/entity/activity.entity';
-import { User } from '../../../modules/user/entity/user.entity';
+import { Activity } from '../../../../activity/infra/db/entity/activity.entity';
+import { User } from '../../../../user/infra/db/entity/user.entity';
 import {
   CreateDateColumn,
   DeleteDateColumn,

@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserActivitiesAnsweredService } from './user-activities-answered.service';
-import { DatabaseModule } from '../../../database/database.module';
-import { UserModule } from '../../user/infra/modules/user.module';
+import { DatabaseModule } from '../../../../database/database.module';
+import { UserModule } from '../../../user/infra/modules/user.module';
 import { User } from '../../user/entity/user.entity';
 import { UserScore } from '../../user-score/entity/user-score.entity';
-import { UserScoreService } from '../../user-score/infra/services/user-score.service';
+import { UserScoreService } from '../../../user-score/infra/services/user-score.service';
 import { UserScoreRepository } from '../../user-score/repositories/user-score.repository';
 import { UserRepository } from '../../user/repositories/user.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
-import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
-import { ActivityNotFoundException } from '../domain/errors/ActivityNotFound.exception';
-import { ActivityAlreadyAnsweredException } from '../domain/errors/ActivityAlreadyAnswered.exception';
-import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
-import { UserActivityAnsweredRepository } from '../repository/user-activities-answered.repository';
+import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
+import { ActivityNotFoundException } from '../../domain/dtos/errors/ActivityNotFound.exception';
+import { ActivityAlreadyAnsweredException } from '../../domain/dtos/errors/ActivityAlreadyAnswered.exception';
+import { WrongAnswerException } from '../../domain/dtos/errors/WrongAnswer.exception';
+import { UserActivityAnsweredRepository } from '../repositories/user-activities-answered.repository';
 import { ActivityRepository } from '../../activity/repositories/activity.repository';
-import { UserCourseConcludedRepository } from '../../user-courses-concluded/repository/user-courses-concluded.repository';
+import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
 import { CourseRepository } from '../../course/repositories/course.repository';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('UserActivitiesAnsweredService', () => {
   let userActivitiesAnsweredService: UserActivitiesAnsweredService;

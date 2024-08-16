@@ -9,15 +9,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserActivitiesAnsweredService } from '../services/user-activities-answered.service';
+import { UserActivitiesAnsweredService } from '../infra/services/user-activities-answered.service';
 import { Request, Response } from 'express';
 import {
   AnswerQuestionRequestDTO,
   AnswerQuestionResponseDTO,
-} from '../domain/requests/AnswerQuestion.request.dto';
+} from '../domain/dtos/requests/AnswerQuestion.request.dto';
 import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
 import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { WrongAnswerException } from '../domain/errors/WrongAnswer.exception';
+import { WrongAnswerException } from '../domain/dtos/errors/WrongAnswer.exception';
 import { CommonException } from '../../../shared/domain/errors/Common.exception';
 
 @Controller('course')

@@ -19,7 +19,7 @@ import { ActivityRepository } from '../../../activity/infra/db/repositories/acti
 import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';
 import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user-courses-concluded.entity';
 import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
-import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repository/user-activities-answered.repository';
+import { UserActivityAnsweredRepository } from '../../../user-activities-answered/repositories/user-activities-answered.repository';
 import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
 
 @Module({
