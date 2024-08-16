@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { UserScore } from '../entity/user-score.entity';
+import { UserScoreRepositoryInterface } from '../../../domain/dtos/repositories/user-score.repository';
 
 @Injectable()
-export class UserScoreRepository extends Repository<UserScore> {
+export class UserScoreRepository extends Repository<UserScore> implements UserScoreRepositoryInterface {
   constructor(private dataSource: DataSource) {
     super(UserScore, dataSource.createEntityManager());
   }

@@ -1,11 +1,11 @@
 import { Controller, Get, HttpException, Req, Res } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserScoreService } from '../services/user-score.service';
-import { NotAuthenticatedException } from '../../../shared/domain/errors/NotAuthenticated.exception';
-import { AllExceptionsFilterDTO } from '../../../shared/domain/dtos/errors/AllException.filter.dto';
-import { CommonException } from '../../../shared/domain/errors/Common.exception';
+import { UserScoreService } from '../../services/user-score.service';
+import { NotAuthenticatedException } from '../../../../../shared/domain/errors/NotAuthenticated.exception';
+import { AllExceptionsFilterDTO } from '../../../../../shared/domain/dtos/errors/AllException.filter.dto';
+import { CommonException } from '../../../../../shared/domain/errors/Common.exception';
 import { Request, Response } from 'express';
-import { MultipleTopScoresResponseDTO } from '../../user/domain/dtos/requests/FindTopScores.request.dto';
+import { MultipleTopScoresResponseDTO } from '../../../../user/domain/dtos/requests/FindTopScores.request.dto';
 
 @Controller('scores')
 @ApiTags('Placar de Usuários')

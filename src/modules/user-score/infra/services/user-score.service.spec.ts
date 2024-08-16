@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserScoreService } from './user-score.service';
-import { DatabaseModule } from '../../../database/database.module';
-import { UserModule } from '../../user/infra/modules/user.module';
+import { DatabaseModule } from '../../../../database/database.module';
+import { UserModule } from '../../../user/infra/modules/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../user/entity/user.entity';
 import { UserScore } from '../entity/user-score.entity';
-import { UserScoreRepository } from '../repository/user-score.repository';
+import { UserScoreRepository } from '../repositories/user-score.repository';
 import { UserRepository } from '../../user/repositories/user.repository';
 import { JWTProvider } from '../../user/providers/jwt.provider';
-import { UserNotFoundException } from '../../user/domain/dtos/errors/UserNotFound.exception';
-import { UnprocessableDataException } from '../../../shared/domain/errors/UnprocessableData.exception';
-import { TestHelper } from '../../../../test/helpers/dbInstanceHelper';
+import { UserNotFoundException } from '../../../user/domain/dtos/errors/UserNotFound.exception';
+import { UnprocessableDataException } from '../../../../shared/domain/errors/UnprocessableData.exception';
+import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('UserScoreService', () => {
   let userScoreService: UserScoreService;

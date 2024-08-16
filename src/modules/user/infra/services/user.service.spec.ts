@@ -16,7 +16,7 @@ import { EmailAlreadyRegisteredException } from '../../domain/dtos/errors/EmailA
 import { UsernameAlreadyRegisteredException } from '../../domain/dtos/errors/UsernameAlreadyRegistered.exception';
 import { InvalidCredentialsException } from '../../domain/dtos/errors/InvalidCredentials.exception';
 import { UserNotFoundException } from '../../domain/dtos/errors/UserNotFound.exception';
-import { UserScoreRepository } from '../../../user-score/repository/user-score.repository';
+import { UserScoreRepository } from '../../../user-score/repositories/user-score.repository';
 import { TestHelper } from '../../../../../test/helpers/dbInstanceHelper';
 
 describe('UserService Test Suites', () => {

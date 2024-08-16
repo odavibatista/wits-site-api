@@ -16,7 +16,7 @@ import { UserCourseConcluded } from '../../../user-courses-concluded/entity/user
 import { UserActivityAnswered } from '../../../user-activities-answered/entity/user-activities-answered.entity';
 import { UserScore } from '../../../user-score/entity/user-score.entity';
 import { UserRepository } from '../db/repositories/user.repository';
-import { UserScoreRepository } from '../../../user-score/repository/user-score.repository';
+import { UserScoreRepository } from '../../../user-score/repositories/user-score.repository';
 import { AuthenticationMiddleware } from '../http/middlewares/auth.middleware';
 import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
 
