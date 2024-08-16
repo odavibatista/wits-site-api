@@ -12,7 +12,7 @@ import { Activity } from '../../../activity/infra/db/entity/activity.entity';
 import { UserActivityAnsweredRepository } from '../db/repositories/user-activities-answered.repository';
 import { ActivityRepository } from '../../../activity/infra/db/repositories/activity.repository';
 import { UserRepository } from '../../../user/infra/db/repositories/user.repository';
-import { UserActivitiesAnsweredController } from '../../controller/user-activities-answered.controller';
+import { UserActivitiesAnsweredController } from '../http/controllers/user-activities-answered.controller';
 import { AuthenticationMiddleware } from '../../../user/infra/http/middlewares/auth.middleware';
 import { JWTProvider } from '../../../user/infra/providers/jwt.provider';
 import { UserCourseConcludedRepository } from '../../../user-courses-concluded/repository/user-courses-concluded.repository';
